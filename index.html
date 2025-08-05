@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Engagement App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Login Page Styles */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+        }
+
+        .login-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-title {
+            color: #4682b4;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #4682b4;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-group input {
+            width: auto;
+            margin-right: 8px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .btn-primary {
+            background: #4682b4;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5a9bd4;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #3cb371;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #48d384;
+            transform: translateY(-2px);
+        }
+
+        .btn-warning {
+            background: #ff8c00;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: #ffa500;
+            transform: translateY(-2px);
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background: linear-gradient(135deg, #4682b4 0%, #5a9bd4 100%);
+            padding: 15px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .app-title {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .nav-left, .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            padding: 10px 15px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.dashboard { background: #6495ed; }
+        .nav-btn.kudos { background: #3cb371; }
+        .nav-btn.challenges { background: #ff8c00; }
+        .nav-btn.admin { background: #dc143c; }
+        .nav-btn.profile { background: #8a2be2; }
+        .nav-btn.help { background: #ff6347; }
+        .nav-btn.feedback { background: #1e90ff; }
+        .nav-btn.logout { background: #b22222; }
+
+        /* Main Content */
+        .main-content {
+            background: #f0f8ff;
+            min-height: calc(100vh - 80px);
+            padding: 30px 0;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #4682b4;
+        }
+
+        .profile-info {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .profile-label {
+            font-weight: bold;
+            color: #4682b4;
+        }
+
+        .profile-value {
+            color: #666;
+        }
+
+        .edit-btn {
+            background: #8a2be2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+
+        .edit-btn:hover {
+            background: #9932cc;
+            transform: translateY(-2px);
+        }
+
+        /* Challenge Styles */
+        .challenge-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .challenge-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff8c00;
+            margin-bottom: 10px;
+        }
+
+        .challenge-desc {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .day-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .complete-week-btn {
+            background: #3cb371;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .complete-week-btn:hover {
+            background: #48d384;
+            transform: translateY(-2px);
+        }
+
+        /* Kudos Styles */
+        .kudos-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid #3cb371;
+        }
+
+        .kudos-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .kudos-from {
+            font-weight: bold;
+            color: #3cb371;
+        }
+
+        .kudos-date {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .kudos-message {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        /* Admin Styles */
+        .admin-nav {
+            background: #dc143c;
+            padding: 15px 0;
+            margin-bottom: 20px;
+        }
+
+        .admin-nav .nav-content {
+            justify-content: center;
+        }
+
+        .admin-nav .nav-btn {
+            background: rgba(255,255,255,0.2);
+            margin: 0 5px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-card.users .stat-value { color: #4682b4; }
+        .stat-card.challenges .stat-value { color: #ff8c00; }
+        .stat-card.admins .stat-value { color: #dc143c; }
+
+        /* Form Styles */
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #4682b4;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-left, .nav-right {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .days-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .back-btn {
+            background: #4682b4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #5a9bd4;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="login-container">
+        <div class="login-card">
+            <h1 class="login-title">Employee App Login</h1>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Enter your password">
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="remember">
+                <label for="remember">Remember me</label>
+            </div>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="login()">Login</button>
+                <button class="btn btn-success" onclick="showSignUp()">Sign Up</button>
+                <button class="btn btn-warning" onclick="resetPassword()">Reset Password</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div id="signUpModal" class="login-container hidden">
+        <div class="login-card">
+            <h2 class="login-title">Create New Account</h2>
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" placeholder="First Name">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" placeholder="Last Name">
+            </div>
+            <div class="form-group">
+                <label for="signUpEmail">Email:</label>
+                <input type="email" id="signUpEmail" placeholder="Email Address">
+            </div>
+            <div class="form-group">
+                <label for="signUpPassword">Password:</label>
+                <input type="password" id="signUpPassword" placeholder="Create Password">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" placeholder="Phone Number">
+            </div>
+            <div class="form-group">
+                <label for="company">Company:</label>
+                <input type="text" id="company" placeholder="Company Name">
+            </div>
+            <div class="button-group">
+                <button class="btn btn-success" onclick="signUp()">Create Account</button>
+                <button class="btn btn-primary" onclick="showLogin()">Back to Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="mainApp" class="hidden">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-content">
+                <div class="app-title">Employee App</div>
+                <div class="nav-left">
+                    <button class="nav-btn dashboard" onclick="showDashboard()">Dashboard</button>
+                    <button class="nav-btn kudos" onclick="showKudos()">Kudos Wall</button>
+                    <button class="nav-btn challenges" onclick="showChallenges()">Challenges</button>
+                    <button class="nav-btn admin hidden" id="adminBtn" onclick="showAdmin()">Admin</button>
+                </div>
+                <div class="nav-right">
+                    <button class="nav-btn profile" onclick="showProfile()">Update Profile</button>
+                    <button class="nav-btn help" onclick="showHelp()">Help</button>
+                    <button class="nav-btn feedback" onclick="showFeedback()">Feedback</button>
+                    <button class="nav-btn logout" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Dashboard Page -->
+        <div id="dashboardPage" class="main-content">
+            <div class="container">
+                <h1 class="page-title" id="welcomeMessage">Welcome back!</h1>
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <h3 class="card-title">Profile Information</h3>
+                        <div id="profileInfo">
+                            <!-- Profile info will be populated by JavaScript -->
+                        </div>
+                        <button class="edit-btn" onclick="showProfile()">Edit Profile</button>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Recent Kudos</h3>
+                        <p id="kudosCount">You have received 0 kudos!</p>
+                        <p style="color: #666; margin-top: 10px;">Keep up the great work and check the Kudos Wall for all your recognition.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Weekly Challenges</h3>
+                        <p id="challengeCount">2 active challenges this week</p>
+                        <p style="color: #666; margin-top: 10px;">Stay healthy and productive with our wellness challenges.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kudos Wall Page -->
+        <div id="kudosPage" class="main-content hidden">
+            <div class="container">
+                <button class="back-btn" onclick="showDashboard()">← Back to Dashboard</button>
+                <h1 class="page-title" style="color: #3cb371;">Kudos Wall - Your Recognition</h1>
+                <div id="kudosList">
+                    <div class="kudos-item">
+                        <div class="kudos-header">
+                            <span class="kudos-from">From: Sarah Johnson</span>
+                            <span class="kudos-date">March 15, 2024</span>
+                        </div>
+                        <div class="kudos-message">Great job on the quarterly presentation! Your attention to detail and clear communication really impressed the client.</div>
+                    </div>
+                    <div class="kudos-item">
+                        <div class="kudos-header">
+                            <span class="kudos-from">From: Mike Chen</span>
+                            <span class="kudos-date">March 12, 2024</span>
+                        </div>
+                        <div class="kudos-message">Thank you for helping with the project deadline. Your teamwork and dedication made all the difference!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Challenges Page -->
+        <div id="challengesPage" class="main-content hidden">
+            <div class="container">
+                <button class="back-btn" onclick="showDashboard()">← Back to Dashboard</button>
+                <h1 class="page-title" style="color: #ff8c00;">Weekly Wellness Challenges</h1>
+                
+                <div class="challenge-item">
+                    <div class="challenge-title">Daily Steps Challenge</div>
+                    <div class="challenge-desc">Walk 250 steps each hour during work hours</div>
+                    <div class="days-grid">
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="steps-mon"> <label for="steps-mon">Monday</label>
+                        </div>
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="steps-tue"> <label for="steps-tue">Tuesday</label>
+                        </div>
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="steps-wed"> <label for="steps-wed">Wednesday</label>
+                        </div>
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="steps-thu"> <label for="steps-thu">Thursday</label>
+                        </div>
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="steps-fri"> <label for="steps-fri">Friday</label>
+                        </div>
+                    </div>
+                    <button class="complete-week-btn" onclick="completeChallenge('steps')">Mark Week Complete</button>
+                </div>
+
+                <div class="challenge-item">
+                    <div class="challenge-title">Pomodoro Focus Challenge</div>
+                    <div class="challenge-desc">Use Pomodoro Technique: 25 min focus, 5 min break - once per day</div>
+                    <div class="days-grid">
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="pomodoro-mon"> <label for="pomodoro-mon">Monday</label>
+                        </div>
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="pomodoro-tue"> <label for="pomodoro-tue">Tuesday</label>
+                        </div>
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="pomodoro-wed"> <label for="pomodoro-wed">Wednesday</label>
+                        </div>
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="pomodoro-thu"> <label for="pomodoro-thu">Thursday</label>
+                        </div>
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="pomodoro-fri"> <label for="pomodoro-fri">Friday</label>
+                        </div>
+                    </div>
+                    <button class="complete-week-btn" onclick="completeChallenge('pomodoro')">Mark Week Complete</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Page -->
+        <div id="adminPage" class="main-content hidden">
+            <div class="admin-nav">
+                <div class="nav-content">
+                    <button class="nav-btn" onclick="showAdminDashboard()">Dashboard</button>
+                    <button class="nav-btn" onclick="showCreateUser()">Create User</button>
+                    <button class="nav-btn" onclick="showCreateChallenge()">Create Challenge</button>
+                    <button class="nav-btn" onclick="showManageChallenges()">Manage Challenges</button>
+                    <button class="nav-btn" onclick="showEmployeeDatabase()">Employee Database</button>
+                </div>
+            </div>
+            
+            <div class="container">
+                <button class="back-btn" onclick="showDashboard()">← Back to App</button>
+                
+                <!-- Admin Dashboard -->
+                <div id="adminDashboard">
+                    <h1 class="page-title" style="color: #dc143c;">Admin Dashboard</h1>
+                    <div class="stats-grid">
+                        <div class="stat-card users">
+                            <div class="stat-value">5</div>
+                            <div class="stat-label">Total Users</div>
+                        </div>
+                        <div class="stat-card challenges">
+                            <div class="stat-value">2</div>
+                            <div class="stat-label">Active Challenges</div>
+                        </div>
+                        <div class="stat-card admins">
+                            <div class="stat-value">1</div>
+                            <div class="stat-label">Admin Users</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Create User Form -->
+                <div id="createUserForm" class="hidden">
+                    <div class="form-container">
+                        <h2 class="form-title">Create New User Profile</h2>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name:</label>
+                                <input type="text" id="newFirstName" placeholder="First Name">
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name:</label>
+                                <input type="text" id="newLastName" placeholder="Last Name">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Email:</label>
+                                <input type="email" id="newEmail" placeholder="Email Address">
+                            </div>
+                            <div class="form-group">
+                                <label>Phone:</label>
+                                <input type="tel" id="newPhone" placeholder="Phone Number">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Client Name:</label>
+                                <input type="text" id="newClient" placeholder="Client Company">
+                            </div>
+                            <div class="form-group">
+                                <label>Employment Type:</label>
+                                <select id="newEmpType" style="width: 100%; padding: 12px; border: 2px solid #e1e5e9; border-radius: 8px;">
+                                    <option value="W2">W2</option>
+                                    <option value="1099">1099</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Employer of Record:</label>
+                                <input type="text" id="newEOR" placeholder="EOR Company">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Notes:</label>
+                            <textarea id="newNotes" rows="3" style="width: 100%; padding: 12px; border: 2px solid #e1e5e9; border-radius: 8px; resize: vertical;" placeholder="Additional notes..."></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn btn-success" onclick="createUser()">Create User</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other admin sections will be populated by JavaScript -->
+                <div id="createChallengeForm" class="hidden">
+                    <div class="form-container">
+                        <h2 class="form-title">Create Weekly Challenge</h2>
+                        <div class="form-group">
+                            <label>Challenge Title:</label>
+                            <input type="text" id="challengeTitle" placeholder="Enter challenge title">
+                        </div>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="challengeDesc" rows="4" style="width: 100%; padding: 12px; border: 2px solid #e1e5e9; border-radius: 8px; resize: vertical;" placeholder="Describe the challenge..."></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn btn-warning" onclick="createChallenge()">Create Challenge</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Edit Page -->
+        <div id="profilePage" class="main-content hidden">
+            <div class="container">
+                <button class="back-btn" onclick="showDashboard()">← Back to Dashboard</button>
+                <div class="form-container">
+                    <h2 class="form-title">Edit Profile Information</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>First Name:</label>
+                            <input type="text" id="editFirstName">
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name:</label>
+                            <input type="text" id="editLastName">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Email:</label>
+                            <input type="email" id="editEmail">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone:</label>
+                            <input type="tel" id="editPhone">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Preferred Contact Method:</label>
+                        <select id="editContact" style="width: 100%; padding: 12px; border: 2px solid #e1e5e9; border-radius: 8px;">
+                            <option value="Email">Email</option>
+                            <option value="Phone Call">Phone Call</option>
+                            <option value="Text">Text Message</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-success" onclick="saveProfile()">Save Changes</button>
+                        <button class="btn btn-primary" onclick="showDashboard()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Help Page -->
+        <div id="helpPage" class="main-content hidden">
+            <div class="container">
+                <button class="back-btn" onclick="showDashboard()">← Back to Dashboard</button>
+                <div class="form-container">
+                    <h2 class="form-title">Submit Help Request</h2>
+                    <div class="form-group">
+                        <label>Request Type:</label>
+                        <select id="helpType" style="width: 100%; padding: 12px; border: 2px solid #e1e5e9; border-radius: 8px;">
+                            <option value="">Select request type...</option>
+                            <option value="Tech Support">Tech Support</option>
+                            <option value="General Question">General Question</option>
+                            <option value="Account Issue">Account Issue</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Subject:</label>
+                        <input type="text" id="helpSubject" placeholder="Brief description of your issue">
+                    </div>
+                    <div class="form-group">
+                        <label>Message:</label>
+                        <textarea id="helpMessage" rows="5" style="width: 100%; padding: 12px; border: 2px solid #e1e5e9; border-radius: 8px; resize: vertical;" placeholder="Describe your issue or question in detail..."></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-warning" onclick="submitHelp()">Submit Request</button>
+                        <button class="btn btn-primary" onclick="showDashboard()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feedback Page -->
+        <div id="feedbackPage" class="main-content hidden">
+            <div class="container">
+                <button class="back-btn" onclick="showDashboard()">← Back to Dashboard</button>
+                <div class="form-container">
+                    <h2 class="form-title">Submit Feedback & Suggestions</h2>
+                    <div class="form-group">
+                        <label>Category:</label>
+                        <select id="feedbackCategory" style="width: 100%; padding: 12px; border: 2px solid #e1e5e9; border-radius: 8px;">
+                            <option value="">Select category...</option>
+                            <option value="Feature Request">Feature Request</option>
+                            <option value="Bug Report">Bug Report</option>
+                            <option value="UI/UX Improvement">UI/UX Improvement</option>
+                            <option value="General Feedback">General Feedback</option>
+                            <option value="Complaint">Complaint</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Subject:</label>
+                        <input type="text" id="feedbackSubject" placeholder="Brief summary of your feedback">
+                    </div>
+                    <div class="form-group">
+                        <label>Feedback:</label>
+                        <textarea id="feedbackMessage" rows="5" style="width: 100%; padding: 12px; border: 2px solid #e1e5e9; border-radius: 8px; resize: vertical;" placeholder="Share your thoughts, suggestions, or concerns..."></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-success" onclick="submitFeedback()">Submit Feedback</button>
+                        <button class="btn btn-primary" onclick="showDashboard()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data storage (in a real app, this would be a database)
+        let users = [
+            {
+                id: 1,
+                firstName: 'John',
+                lastName: 'Doe',
+                email: 'john.doe@company.com',
+                password: 'password123',
+                phone: '555-0123',
+                preferredContact: 'Email',
+                companyName: 'Tech Corp',
+                startDate: '2023-06-01',
+                estimatedEndDate: '2024-06-01',
+                contractType: 'W2',
+                isAdmin: false
+            },
+            {
+                id: 2,
+                firstName: 'Admin',
+                lastName: 'User',
+                email: 'admin@company.com',
+                password: 'admin123',
+                phone: '555-0124',
+                preferredContact: 'Email',
+                companyName: 'Tech Corp',
+                startDate: '2022-01-01',
+                estimatedEndDate: '2025-01-01',
+                contractType: 'W2',
+                isAdmin: true
+            }
+        ];
+
+        let challenges = [
+            {
+                id: 1,
+                title: 'Daily Steps Challenge',
+                description: 'Walk 250 steps each hour during work hours',
+                isActive: true,
+                completedDays: []
+            },
+            {
+                id: 2,
+                title: 'Pomodoro Focus Challenge',
+                description: 'Use Pomodoro Technique: 25 min focus, 5 min break - once per day',
+                isActive: true,
+                completedDays: []
+            }
+        ];
+
+        let kudosMessages = [
+            {
+                id: 1,
+                fromUser: 'Sarah Johnson',
+                toUserId: 1,
+                message: 'Great job on the quarterly presentation! Your attention to detail and clear communication really impressed the client.',
+                dateSent: '2024-03-15'
+            },
+            {
+                id: 2,
+                fromUser: 'Mike Chen',
+                toUserId: 1,
+                message: 'Thank you for helping with the project deadline. Your teamwork and dedication made all the difference!',
+                dateSent: '2024-03-12'
+            }
+        ];
+
+        let currentUser = null;
+
+        // Authentication functions
+        function login() {
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            if (!email || !password) {
+                alert('Please enter both email and password.');
+                return;
+            }
+
+            const user = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
+
+            if (user) {
+                currentUser = user;
+                document.getElementById('loginPage').classList.add('hidden');
+                document.getElementById('mainApp').classList.remove('hidden');
+                
+                // Show admin button if user is admin
+                if (user.isAdmin) {
+                    document.getElementById('adminBtn').classList.remove('hidden');
+                }
+                
+                showDashboard();
+            } else {
+                alert('Invalid email or password.');
+            }
+        }
+
+        function showSignUp() {
+            document.getElementById('loginPage').classList.add('hidden');
+            document.getElementById('signUpModal').classList.remove('hidden');
+        }
+
+        function showLogin() {
+            document.getElementById('signUpModal').classList.add('hidden');
+            document.getElementById('loginPage').classList.remove('hidden');
+        }
+
+        function signUp() {
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('signUpEmail').value.trim();
+            const password = document.getElementById('signUpPassword').value;
+            const phone = document.getElementById('phone').value.trim();
+            const company = document.getElementById('company').value.trim();
+
+            if (!firstName || !lastName || !email || !password) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            // Check if email already exists
+            if (users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
+                alert('An account with this email already exists.');
+                return;
+            }
+
+            const newUser = {
+                id: users.length + 1,
+                firstName,
+                lastName,
+                email,
+                password,
+                phone,
+                preferredContact: 'Email',
+                companyName: company,
+                startDate: new Date().toISOString().split('T')[0],
+                estimatedEndDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+                contractType: 'W2',
+                isAdmin: false
+            };
+
+            users.push(newUser);
+            alert('Account created successfully! You can now log in.');
+            showLogin();
+        }
+
+        function resetPassword() {
+            alert('Password reset functionality would be implemented here. For demo purposes, use:\n\nRegular user: john.doe@company.com / password123\nAdmin user: admin@company.com / admin123');
+        }
+
+        function logout() {
+            currentUser = null;
+            document.getElementById('mainApp').classList.add('hidden');
+            document.getElementById('loginPage').classList.remove('hidden');
+            document.getElementById('adminBtn').classList.add('hidden');
+            
+            // Clear form fields
+            document.getElementById('email').value = '';
+            document.getElementById('password').value = '';
+        }
+
+        // Navigation functions
+        function hideAllPages() {
+            const pages = ['dashboardPage', 'kudosPage', 'challengesPage', 'adminPage', 'profilePage', 'helpPage', 'feedbackPage'];
+            pages.forEach(page => {
+                document.getElementById(page).classList.add('hidden');
+            });
+        }
+
+        function showDashboard() {
+            hideAllPages();
+            document.getElementById('dashboardPage').classList.remove('hidden');
+            
+            if (currentUser) {
+                document.getElementById('welcomeMessage').textContent = `Welcome back, ${currentUser.firstName} ${currentUser.lastName}!`;
+                
+                // Update profile info
+                const profileInfo = document.getElementById('profileInfo');
+                profileInfo.innerHTML = `
+                    <div class="profile-info">
+                        <span class="profile-label">Name:</span>
+                        <span class="profile-value">${currentUser.firstName} ${currentUser.lastName}</span>
+                    </div>
+                    <div class="profile-info">
+                        <span class="profile-label">Email:</span>
+                        <span class="profile-value">${currentUser.email}</span>
+                    </div>
+                    <div class="profile-info">
+                        <span class="profile-label">Phone:</span>
+                        <span class="profile-value">${currentUser.phone || 'Not provided'}</span>
+                    </div>
+                    <div class="profile-info">
+                        <span class="profile-label">Contact:</span>
+                        <span class="profile-value">${currentUser.preferredContact}</span>
+                    </div>
+                    <div class="profile-info">
+                        <span class="profile-label">Company:</span>
+                        <span class="profile-value">${currentUser.companyName || 'Not provided'}</span>
+                    </div>
+                    <div class="profile-info">
+                        <span class="profile-label">Start Date:</span>
+                        <span class="profile-value">${currentUser.startDate || 'Not provided'}</span>
+                    </div>
+                    <div class="profile-info">
+                        <span class="profile-label">Contract:</span>
+                        <span class="profile-value">${currentUser.contractType || 'Not provided'}</span>
+                    </div>
+                `;
+                
+                // Update kudos count
+                const userKudos = kudosMessages.filter(k => k.toUserId === currentUser.id);
+                document.getElementById('kudosCount').textContent = `You have received ${userKudos.length} kudos!`;
+            }
+        }
+
+        function showKudos() {
+            hideAllPages();
+            document.getElementById('kudosPage').classList.remove('hidden');
+        }
+
+        function showChallenges() {
+            hideAllPages();
+            document.getElementById('challengesPage').classList.remove('hidden');
+        }
+
+        function showAdmin() {
+            if (currentUser && currentUser.isAdmin) {
+                hideAllPages();
+                document.getElementById('adminPage').classList.remove('hidden');
+                showAdminDashboard();
+            }
+        }
+
+        function showProfile() {
+            hideAllPages();
+            document.getElementById('profilePage').classList.remove('hidden');
+            
+            // Populate form with current user data
+            if (currentUser) {
+                document.getElementById('editFirstName').value = currentUser.firstName;
+                document.getElementById('editLastName').value = currentUser.lastName;
+                document.getElementById('editEmail').value = currentUser.email;
+                document.getElementById('editPhone').value = currentUser.phone || '';
+                document.getElementById('editContact').value = currentUser.preferredContact;
+            }
+        }
+
+        function showHelp() {
+            hideAllPages();
+            document.getElementById('helpPage').classList.remove('hidden');
+        }
+
+        function showFeedback() {
+            hideAllPages();
+            document.getElementById('feedbackPage').classList.remove('hidden');
+        }
+
+        // Challenge functions
+        function completeChallenge(challengeType) {
+            const days = ['mon', 'tue', 'wed', 'thu', 'fri'];
+            days.forEach(day => {
+                document.getElementById(`${challengeType}-${day}`).checked = true;
+            });
+            
+            const challengeName = challengeType === 'steps' ? 'Daily Steps Challenge' : 'Pomodoro Focus Challenge';
+            alert(`Congratulations! You've completed the '${challengeName}' for this week! 🎉`);
+        }
+
+        // Profile functions
+        function saveProfile() {
+            if (currentUser) {
+                currentUser.firstName = document.getElementById('editFirstName').value.trim();
+                currentUser.lastName = document.getElementById('editLastName').value.trim();
+                currentUser.email = document.getElementById('editEmail').value.trim();
+                currentUser.phone = document.getElementById('editPhone').value.trim();
+                currentUser.preferredContact = document.getElementById('editContact').value;
+                
+                alert('Profile updated successfully!');
+                showDashboard();
+            }
+        }
+
+        // Help and Feedback functions
+        function submitHelp() {
+            const type = document.getElementById('helpType').value;
+            const subject = document.getElementById('helpSubject').value.trim();
+            const message = document.getElementById('helpMessage').value.trim();
+
+            if (!type || !subject || !message) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            alert('Your help request has been submitted successfully! A talent engagement administrator will contact you soon.');
+            
+            // Clear form
+            document.getElementById('helpType').value = '';
+            document.getElementById('helpSubject').value = '';
+            document.getElementById('helpMessage').value = '';
+            
+            showDashboard();
+        }
+
+        function submitFeedback() {
+            const category = document.getElementById('feedbackCategory').value;
+            const subject = document.getElementById('feedbackSubject').value.trim();
+            const message = document.getElementById('feedbackMessage').value.trim();
+
+            if (!category || !subject || !message) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            alert('Thank you for your feedback! We appreciate your input and will review your suggestions.');
+            
+            // Clear form
+            document.getElementById('feedbackCategory').value = '';
+            document.getElementById('feedbackSubject').value = '';
+            document.getElementById('feedbackMessage').value = '';
+            
+            showDashboard();
+        }
+
+        // Admin functions
+        function showAdminDashboard() {
+            document.getElementById('adminDashboard').classList.remove('hidden');
+            document.getElementById('createUserForm').classList.add('hidden');
+            document.getElementById('createChallengeForm').classList.add('hidden');
+        }
+
+        function showCreateUser() {
+            document.getElementById('adminDashboard').classList.add('hidden');
+            document.getElementById('createUserForm').classList.remove('hidden');
+            document.getElementById('createChallengeForm').classList.add('hidden');
+        }
+
+        function showCreateChallenge() {
+            document.getElementById('adminDashboard').classList.add('hidden');
+            document.getElementById('createUserForm').classList.add('hidden');
+            document.getElementById('createChallengeForm').classList.remove('hidden');
+        }
+
+        function showManageChallenges() {
+            alert('Manage Challenges feature - In a full implementation, this would show a list of all challenges with edit/delete options.');
+        }
+
+        function showEmployeeDatabase() {
+            const employees = users.filter(u => !u.isAdmin);
+            let tableHTML = `
+                <h2 style="color: #dc143c; margin-bottom: 20px;">Employee Database</h2>
+                <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+                                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6;">First Name</th>
+                                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6;">Last Name</th>
+                                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6;">Email</th>
+                                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6;">Phone</th>
+                                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6;">Company</th>
+                                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6;">Contract Type</th>
+                                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6;">Start Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+            
+            employees.forEach(emp => {
+                tableHTML += `
+                    <tr style="border-bottom: 1px solid #dee2e6;">
+                        <td style="padding: 12px;">${emp.firstName}</td>
+                        <td style="padding: 12px;">${emp.lastName}</td>
+                        <td style="padding: 12px;">${emp.email}</td>
+                        <td style="padding: 12px;">${emp.phone || 'N/A'}</td>
+                        <td style="padding: 12px;">${emp.companyName || 'N/A'}</td>
+                        <td style="padding: 12px;">${emp.contractType || 'N/A'}</td>
+                        <td style="padding: 12px;">${emp.startDate || 'N/A'}</td>
+                    </tr>
+                `;
+            });
+            
+            tableHTML += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            
+            document.getElementById('adminDashboard').innerHTML = tableHTML;
+        }
+
+        function createUser() {
+            const firstName = document.getElementById('newFirstName').value.trim();
+            const lastName = document.getElementById('newLastName').value.trim();
+            const email = document.getElementById('newEmail').value.trim();
+            const phone = document.getElementById('newPhone').value.trim();
+            const client = document.getElementById('newClient').value.trim();
+            const empType = document.getElementById('newEmpType').value;
+            const eor = document.getElementById('newEOR').value.trim();
+            const notes = document.getElementById('newNotes').value.trim();
+
+            if (!firstName || !lastName || !email) {
+                alert('Please fill in the required fields (First Name, Last Name, Email).');
+                return;
+            }
+
+            // Check if email already exists
+            if (users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
+                alert('A user with this email already exists.');
+                return;
+            }
+
+            const newUser = {
+                id: users.length + 1,
+                firstName,
+                lastName,
+                email,
+                password: 'temppass123', // Temporary password
+                phone,
+                preferredContact: 'Email',
+                companyName: client,
+                startDate: new Date().toISOString().split('T')[0],
+                estimatedEndDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+                contractType: empType,
+                employerOfRecord: eor,
+                notes,
+                isAdmin: false
+            };
+
+            users.push(newUser);
+            alert('User created successfully! Temporary password: temppass123');
+            
+            // Clear form
+            document.getElementById('newFirstName').value = '';
+            document.getElementById('newLastName').value = '';
+            document.getElementById('newEmail').value = '';
+            document.getElementById('newPhone').value = '';
+            document.getElementById('newClient').value = '';
+            document.getElementById('newEOR').value = '';
+            document.getElementById('newNotes').value = '';
+            
+            showAdminDashboard();
+        }
+
+        function createChallenge() {
+            const title = document.getElementById('challengeTitle').value.trim();
+            const description = document.getElementById('challengeDesc').value.trim();
+
+            if (!title || !description) {
+                alert('Please fill in both title and description.');
+                return;
+            }
+
+            const newChallenge = {
+                id: challenges.length + 1,
+                title,
+                description,
+                isActive: true,
+                completedDays: []
+            };
+
+            challenges.push(newChallenge);
+            alert('Challenge created successfully!');
+            
+            // Clear form
+            document.getElementById('challengeTitle').value = '';
+            document.getElementById('challengeDesc').value = '';
+            
+            showAdminDashboard();
+        }
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add enter key support for login
+            document.getElementById('password').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    login();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
