@@ -3,16 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EngagePro - Employee Engagement Platform</title>
+    <title>Employee Engagement Platform</title>
+    <style>
+        :root {
+          --primary-color: #667eea;
+          --secondary-color: #764ba2;
+          --accent-color: #f093fb;
+          --success-color: #4ecdc4;
+          --warning-color: #ffe66d;
+          --text-color: #2c3e50;
+          --light-bg: #f8f9fa;
+          --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        body {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          min-height: 100vh;
+          color: var(--text-color);
+        }
+
+        .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 20px;
+        }
+
+        .header {
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(10px);
+          border-radius: 20px;
+          padding: 25px;
+          margin-bottom: 30px;
+          box-shadow: var(--card-shadow);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .logo {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+        }
+
+        .logo h1 {
+          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          font-size: 28px;
+          font-weight: bold;
+        }
+
+        .logo-icon {
+          width: 50px;
+          height: 50px;
+          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-size: 24px;
+        }
+    </style>
 </head>
 <body>
-    <h1>🚀 EngagePro</h1>
-    <p>Employee Engagement Platform</p>
-    <p>If you can see this, the basic HTML is working!</p>
-    
-    <div style="background: blue; color: white; padding: 20px; margin: 20px;">
-        <h2>Test Section</h2>
-        <p>This is a test to make sure everything works before adding the full code.</p>
+    <div class="container">
+      <header class="header">
+        <div class="logo">
+          <div class="logo-icon">🚀</div>
+          <h1>EngagePro</h1>
+        </div>
+        <div>
+          <p>Basic header working!</p>
+        </div>
+      </header>
+      
+      <div style="background: white; padding: 40px; border-radius: 20px;">
+        <h2>✅ Step 1 Complete!</h2>
+        <p>Header and basic styling are working. Ready for Step 2!</p>
+      </div>
     </div>
 </body>
 </html>
