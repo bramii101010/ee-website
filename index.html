@@ -109,6 +109,14 @@
           min-height: 600px;
         }
 
+        .section {
+          display: none;
+        }
+
+        .section.active {
+          display: block;
+        }
+
         .dashboard-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -134,6 +142,110 @@
           color: var(--primary-color);
           margin-bottom: 10px;
         }
+
+        /* Chatbot Styles */
+        .chatbot-toggle {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          width: 60px;
+          height: 60px;
+          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+          border: none;
+          border-radius: 50%;
+          color: white;
+          font-size: 24px;
+          cursor: pointer;
+          box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+          transition: all 0.3s ease;
+          z-index: 1000;
+        }
+
+        .chatbot-toggle:hover {
+          transform: scale(1.1);
+        }
+
+        .chatbot-container {
+          position: fixed;
+          bottom: 90px;
+          right: 20px;
+          width: 350px;
+          height: 500px;
+          max-height: calc(100vh - 110px);
+          background: white;
+          border-radius: 20px;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+          display: none;
+          flex-direction: column;
+          overflow: hidden;
+          z-index: 1000;
+        }
+
+        .chatbot-container.show {
+          display: flex;
+        }
+
+        .chatbot-header {
+          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+          color: white;
+          padding: 20px;
+          display: flex;
+          align-items: center;
+          gap: 15px;
+        }
+
+        .chatbot-messages {
+          flex: 1;
+          padding: 20px;
+          overflow-y: auto;
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .message {
+          max-width: 80%;
+          padding: 12px 16px;
+          border-radius: 18px;
+          line-height: 1.4;
+        }
+
+        .message.bot {
+          background: #f0f2f5;
+          color: var(--text-color);
+          align-self: flex-start;
+        }
+
+        .message.user {
+          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+          color: white;
+          align-self: flex-end;
+        }
+
+        .chatbot-input {
+          padding: 20px;
+          border-top: 1px solid #e1e5e9;
+          display: flex;
+          gap: 10px;
+        }
+
+        .chatbot-input input {
+          flex: 1;
+          padding: 12px 16px;
+          border: 2px solid #e1e5e9;
+          border-radius: 25px;
+          outline: none;
+        }
+
+        .chatbot-send {
+          width: 40px;
+          height: 40px;
+          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+          border: none;
+          border-radius: 50%;
+          color: white;
+          cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -144,37 +256,124 @@
           <h1>EngagePro</h1>
         </div>
         <nav class="nav-links">
-          <a class="nav-link active">Dashboard</a>
-          <a class="nav-link">Challenges</a>
-          <a class="nav-link">Kudos Wall</a>
-          <a class="nav-link">Pulse Survey</a>
+          <a onclick="showSection('dashboard')" class="nav-link active">Dashboard</a>
+          <a onclick="showSection('challenges')" class="nav-link">Challenges</a>
+          <a onclick="showSection('kudos')" class="nav-link">Kudos Wall</a>
+          <a onclick="showSection('pulse')" class="nav-link">Pulse Survey</a>
           <a class="nav-link">Admin</a>
         </nav>
       </header>
 
       <div class="main-content">
-        <div class="dashboard-grid">
-          <div class="card">
-            <div class="metric-number">89%</div>
-            <p>Engagement Score</p>
+        <!-- Dashboard Section -->
+        <div id="dashboard" class="section active">
+          <div class="dashboard-grid">
+            <div class="card">
+              <div class="metric-number">89%</div>
+              <p>Engagement Score</p>
+            </div>
+            <div class="card">
+              <div class="metric-number">12</div>
+              <p>Active Challenges</p>
+            </div>
+            <div class="card">
+              <div class="metric-number">156</div>
+              <p>Kudos This Month</p>
+            </div>
+            <div class="card">
+              <div class="metric-number">76%</div>
+              <p>Participation Rate</p>
+            </div>
           </div>
-          <div class="card">
-            <div class="metric-number">12</div>
-            <p>Active Challenges</p>
-          </div>
-          <div class="card">
-            <div class="metric-number">156</div>
-            <p>Kudos This Month</p>
-          </div>
-          <div class="card">
-            <div class="metric-number">76%</div>
-            <p>Participation Rate</p>
-          </div>
+          <h2>✅ Dashboard Working!</h2>
         </div>
-        
-        <h2>✅ Step 2 Complete!</h2>
-        <p>Navigation and dashboard cards are working. Ready for Step 3!</p>
+
+        <!-- Other Sections -->
+        <div id="challenges" class="section">
+          <h2>🎯 Challenges Section</h2>
+          <p>Challenges content will go here...</p>
+        </div>
+
+        <div id="kudos" class="section">
+          <h2>🙌 Kudos Wall</h2>
+          <p>Kudos content will go here...</p>
+        </div>
+
+        <div id="pulse" class="section">
+          <h2>📋 Pulse Survey</h2>
+          <p>Survey content will go here...</p>
+        </div>
       </div>
     </div>
+
+    <!-- Chatbot -->
+    <button class="chatbot-toggle" onclick="toggleChatbot()">💬</button>
+    
+    <div class="chatbot-container" id="chatbotContainer">
+      <div class="chatbot-header">
+        <div>🤖</div>
+        <div>
+          <h4>EngageBot</h4>
+          <p style="margin: 0; font-size: 12px; opacity: 0.8;">Online • Ready to help</p>
+        </div>
+      </div>
+      
+      <div class="chatbot-messages" id="chatbotMessages">
+        <div class="message bot">
+          Hi! I'm EngageBot. I can help you with challenges, kudos, and more!
+        </div>
+      </div>
+      
+      <div class="chatbot-input">
+        <input type="text" id="chatbotInput" placeholder="Type your message...">
+        <button class="chatbot-send" onclick="sendMessage()">➤</button>
+      </div>
+    </div>
+
+    <script>
+        // Navigation functionality
+        function showSection(sectionName) {
+          document.querySelectorAll('.section').forEach(section => {
+            section.classList.remove('active');
+          });
+          
+          document.getElementById(sectionName).classList.add('active');
+          
+          document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+          });
+          event.target.classList.add('active');
+        }
+
+        // Chatbot functionality
+        function toggleChatbot() {
+          const container = document.getElementById('chatbotContainer');
+          container.classList.toggle('show');
+        }
+
+        function sendMessage() {
+          const input = document.getElementById('chatbotInput');
+          const message = input.value.trim();
+          
+          if (!message) return;
+          
+          addMessage(message, 'user');
+          input.value = '';
+          
+          setTimeout(() => {
+            addMessage('Thanks for your message! This is a demo response.', 'bot');
+          }, 1000);
+        }
+
+        function addMessage(text, sender) {
+          const messagesContainer = document.getElementById('chatbotMessages');
+          const messageDiv = document.createElement('div');
+          messageDiv.className = `message ${sender}`;
+          messageDiv.textContent = text;
+          
+          messagesContainer.appendChild(messageDiv);
+          messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+    </script>
 </body>
 </html>
