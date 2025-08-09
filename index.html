@@ -143,6 +143,196 @@
           margin-bottom: 10px;
         }
 
+        .challenges-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+          gap: 25px;
+        }
+
+        .challenge-card {
+          background: white;
+          border-radius: 15px;
+          padding: 25px;
+          box-shadow: var(--card-shadow);
+          transition: transform 0.3s ease;
+          border-left: 5px solid var(--primary-color);
+        }
+
+        .challenge-card:hover {
+          transform: translateY(-3px);
+        }
+
+        .challenge-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          margin-bottom: 15px;
+        }
+
+        .challenge-title {
+          font-size: 18px;
+          font-weight: 600;
+          margin-bottom: 5px;
+        }
+
+        .challenge-category {
+          display: inline-block;
+          background: var(--light-bg);
+          color: var(--text-color);
+          padding: 4px 12px;
+          border-radius: 20px;
+          font-size: 12px;
+          font-weight: 500;
+        }
+
+        .challenge-points {
+          background: linear-gradient(135deg, var(--success-color), #44a08d);
+          color: white;
+          padding: 8px 15px;
+          border-radius: 20px;
+          font-weight: bold;
+          font-size: 14px;
+        }
+
+        .progress-bar {
+          background: #e1e5e9;
+          border-radius: 10px;
+          height: 8px;
+          margin-bottom: 10px;
+          overflow: hidden;
+        }
+
+        .progress-fill {
+          height: 100%;
+          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+          border-radius: 10px;
+          transition: width 0.3s ease;
+        }
+
+        .btn-primary {
+          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+          color: white;
+          border: none;
+          padding: 12px 24px;
+          border-radius: 25px;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .kudos-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+          gap: 25px;
+        }
+
+        .kudos-card {
+          background: white;
+          border-radius: 15px;
+          padding: 25px;
+          box-shadow: var(--card-shadow);
+          transition: transform 0.3s ease;
+        }
+
+        .kudos-card:hover {
+          transform: translateY(-3px);
+        }
+
+        .kudos-header {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          margin-bottom: 15px;
+        }
+
+        .kudos-avatar {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          background: var(--primary-color);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-weight: bold;
+        }
+
+        .kudos-message {
+          background: var(--light-bg);
+          padding: 15px;
+          border-radius: 10px;
+          margin-bottom: 15px;
+          font-style: italic;
+          line-height: 1.5;
+        }
+
+        .tag {
+          background: #e1e5e9;
+          color: var(--text-color);
+          padding: 4px 10px;
+          border-radius: 15px;
+          font-size: 12px;
+          margin-right: 8px;
+        }
+
+        .survey-section {
+          text-align: center;
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        .survey-question {
+          background: white;
+          border-radius: 15px;
+          padding: 30px;
+          margin-bottom: 25px;
+          box-shadow: var(--card-shadow);
+        }
+
+        .question-text {
+          font-size: 18px;
+          font-weight: 600;
+          margin-bottom: 25px;
+        }
+
+        .rating-options {
+          display: flex;
+          justify-content: center;
+          gap: 15px;
+          margin-bottom: 20px;
+        }
+
+        .rating-option {
+          width: 50px;
+          height: 50px;
+          border: 2px solid #e1e5e9;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          font-weight: bold;
+        }
+
+        .rating-option:hover, .rating-option.selected {
+          border-color: var(--primary-color);
+          background: var(--primary-color);
+          color: white;
+        }
+
+        .rating-labels {
+          display: flex;
+          justify-content: space-between;
+          font-size: 12px;
+          color: #666;
+        }
+
         /* Chatbot Styles */
         .chatbot-toggle {
           position: fixed;
@@ -246,6 +436,12 @@
           color: white;
           cursor: pointer;
         }
+
+        @media (max-width: 768px) {
+          .challenges-grid, .kudos-grid { grid-template-columns: 1fr; }
+          .rating-options { gap: 10px; }
+          .rating-option { width: 40px; height: 40px; }
+        }
     </style>
 </head>
 <body>
@@ -285,23 +481,146 @@
               <p>Participation Rate</p>
             </div>
           </div>
-          <h2>✅ Dashboard Working!</h2>
+          <h2>✅ Full Platform Content Working!</h2>
+          <p>Try navigating to Challenges, Kudos Wall, and Pulse Survey!</p>
         </div>
 
-        <!-- Other Sections -->
+        <!-- Challenges Section -->
         <div id="challenges" class="section">
-          <h2>🎯 Challenges Section</h2>
-          <p>Challenges content will go here...</p>
+          <h2 style="margin-bottom: 30px; color: var(--primary-color);">🎯 Current Challenges</h2>
+          
+          <div class="challenges-grid">
+            <div class="challenge-card">
+              <div class="challenge-header">
+                <div>
+                  <h3 class="challenge-title">30-Day Fitness Challenge</h3>
+                  <span class="challenge-category">Wellness</span>
+                </div>
+                <div class="challenge-points">50 pts</div>
+              </div>
+              <p style="color: #666; margin-bottom: 20px;">Complete 30 minutes of physical activity daily for 30 days. Track your progress and share your journey!</p>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 65%;"></div>
+              </div>
+              <p style="font-size: 12px; color: #666; margin-bottom: 15px;">65% complete • 23 participants</p>
+              <button class="btn-primary">Join Challenge</button>
+            </div>
+
+            <div class="challenge-card">
+              <div class="challenge-header">
+                <div>
+                  <h3 class="challenge-title">Sustainability Week</h3>
+                  <span class="challenge-category">Community</span>
+                </div>
+                <div class="challenge-points">40 pts</div>
+              </div>
+              <p style="color: #666; margin-bottom: 20px;">Participate in eco-friendly activities: bike to work, bring reusable lunch containers, and share sustainability tips.</p>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 80%;"></div>
+              </div>
+              <p style="font-size: 12px; color: #666; margin-bottom: 15px;">80% complete • 31 participants</p>
+              <button class="btn-primary">Join Challenge</button>
+            </div>
+
+            <div class="challenge-card">
+              <div class="challenge-header">
+                <div>
+                  <h3 class="challenge-title">Learning Hour</h3>
+                  <span class="challenge-category">Professional</span>
+                </div>
+                <div class="challenge-points">60 pts</div>
+              </div>
+              <p style="color: #666; margin-bottom: 20px;">Dedicate one hour each week to learning something new - online courses, books, or skill-sharing sessions.</p>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 25%;"></div>
+              </div>
+              <p style="font-size: 12px; color: #666; margin-bottom: 15px;">25% complete • 42 participants</p>
+              <button class="btn-primary">Join Challenge</button>
+            </div>
+          </div>
         </div>
 
+        <!-- Kudos Wall Section -->
         <div id="kudos" class="section">
-          <h2>🙌 Kudos Wall</h2>
-          <p>Kudos content will go here...</p>
+          <h2 style="margin-bottom: 30px; color: var(--primary-color);">🙌 Kudos Wall</h2>
+          
+          <div style="text-align: center; margin-bottom: 30px;">
+            <button class="btn-primary">+ Submit Kudos</button>
+          </div>
+
+          <div class="kudos-grid">
+            <div class="kudos-card">
+              <div class="kudos-header">
+                <div class="kudos-avatar">SC</div>
+                <div>
+                  <h4 style="margin: 0;">Sarah Chen</h4>
+                  <span style="color: #666; font-size: 14px;">to Mike Rodriguez</span>
+                </div>
+                <span style="margin-left: auto; color: #999; font-size: 12px;">2 hours ago</span>
+              </div>
+              <p class="kudos-message">"Thank you for staying late to help debug the authentication issue. Your expertise saved us hours!"</p>
+              <div>
+                <span class="tag">Teamwork</span>
+                <span class="tag">Problem Solving</span>
+              </div>
+            </div>
+
+            <div class="kudos-card">
+              <div class="kudos-header">
+                <div class="kudos-avatar">MR</div>
+                <div>
+                  <h4 style="margin: 0;">Mike Rodriguez</h4>
+                  <span style="color: #666; font-size: 14px;">to Emily Johnson</span>
+                </div>
+                <span style="margin-left: auto; color: #999; font-size: 12px;">5 hours ago</span>
+              </div>
+              <p class="kudos-message">"Emily's design mockups for the new dashboard are absolutely stunning. The user experience flow is intuitive and beautiful!"</p>
+              <div>
+                <span class="tag">Creativity</span>
+                <span class="tag">Excellence</span>
+              </div>
+            </div>
+          </div>
         </div>
 
+        <!-- Pulse Survey Section -->
         <div id="pulse" class="section">
-          <h2>📋 Pulse Survey</h2>
-          <p>Survey content will go here...</p>
+          <div class="survey-section">
+            <h2 style="color: var(--primary-color); margin-bottom: 30px;">📋 Monthly Pulse Survey</h2>
+            <p style="color: #666; margin-bottom: 40px;">Help us improve our workplace by sharing your honest feedback. Your responses are anonymous.</p>
+
+            <div class="survey-question">
+              <p class="question-text">How satisfied are you with your current work-life balance?</p>
+              <div class="rating-options">
+                <div class="rating-option" data-rating="1">1</div>
+                <div class="rating-option" data-rating="2">2</div>
+                <div class="rating-option" data-rating="3">3</div>
+                <div class="rating-option" data-rating="4">4</div>
+                <div class="rating-option" data-rating="5">5</div>
+              </div>
+              <div class="rating-labels">
+                <span>Very Unsatisfied</span>
+                <span>Very Satisfied</span>
+              </div>
+            </div>
+
+            <div class="survey-question">
+              <p class="question-text">How well does management communicate company goals?</p>
+              <div class="rating-options">
+                <div class="rating-option" data-rating="1">1</div>
+                <div class="rating-option" data-rating="2">2</div>
+                <div class="rating-option" data-rating="3">3</div>
+                <div class="rating-option" data-rating="4">4</div>
+                <div class="rating-option" data-rating="5">5</div>
+              </div>
+              <div class="rating-labels">
+                <span>Very Poorly</span>
+                <span>Excellently</span>
+              </div>
+            </div>
+
+            <button class="btn-primary" onclick="submitSurvey()" style="margin-top: 30px;">Submit Survey</button>
+          </div>
         </div>
       </div>
     </div>
@@ -320,17 +639,19 @@
       
       <div class="chatbot-messages" id="chatbotMessages">
         <div class="message bot">
-          Hi! I'm EngageBot. I can help you with challenges, kudos, and more!
+          Hi! I'm EngageBot. I can help you with challenges, kudos, surveys, and more! What would you like to know?
         </div>
       </div>
       
       <div class="chatbot-input">
-        <input type="text" id="chatbotInput" placeholder="Type your message...">
+        <input type="text" id="chatbotInput" placeholder="Type your message..." onkeypress="if(event.key==='Enter') sendMessage()">
         <button class="chatbot-send" onclick="sendMessage()">➤</button>
       </div>
     </div>
 
     <script>
+        let surveyResponses = {};
+
         // Navigation functionality
         function showSection(sectionName) {
           document.querySelectorAll('.section').forEach(section => {
@@ -343,6 +664,40 @@
             link.classList.remove('active');
           });
           event.target.classList.add('active');
+        }
+
+        // Survey functionality
+        document.addEventListener('DOMContentLoaded', function() {
+          document.querySelectorAll('.rating-option').forEach(option => {
+            option.addEventListener('click', function() {
+              const question = this.closest('.survey-question');
+              const questionIndex = Array.from(document.querySelectorAll('.survey-question')).indexOf(question);
+              
+              question.querySelectorAll('.rating-option').forEach(opt => {
+                opt.classList.remove('selected');
+              });
+              
+              this.classList.add('selected');
+              surveyResponses[questionIndex] = this.dataset.rating;
+            });
+          });
+        });
+
+        function submitSurvey() {
+          const totalQuestions = document.querySelectorAll('.survey-question').length;
+          const answeredQuestions = Object.keys(surveyResponses).length;
+          
+          if (answeredQuestions < totalQuestions) {
+            alert('Please answer all questions before submitting.');
+            return;
+          }
+          
+          alert('Thank you for your feedback! 🙏');
+          
+          document.querySelectorAll('.rating-option').forEach(option => {
+            option.classList.remove('selected');
+          });
+          surveyResponses = {};
         }
 
         // Chatbot functionality
@@ -361,7 +716,8 @@
           input.value = '';
           
           setTimeout(() => {
-            addMessage('Thanks for your message! This is a demo response.', 'bot');
+            const response = processMessage(message);
+            addMessage(response, 'bot');
           }, 1000);
         }
 
@@ -373,6 +729,22 @@
           
           messagesContainer.appendChild(messageDiv);
           messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function processMessage(message) {
+          const lowerMessage = message.toLowerCase();
+          
+          if (lowerMessage.includes('challenge')) {
+            return 'Here are our current challenges: 30-Day Fitness Challenge (50 pts), Sustainability Week (40 pts), and Learning Hour (60 pts). Would you like to join any of these?';
+          } else if (lowerMessage.includes('kudos')) {
+            return 'To submit kudos, click the "Submit Kudos" button on the Kudos Wall. You can recognize colleagues for their great work!';
+          } else if (lowerMessage.includes('survey')) {
+            return 'Our monthly pulse survey is anonymous and takes just 2-3 minutes. Your feedback helps improve our workplace!';
+          } else if (lowerMessage.includes('score')) {
+            return 'Current engagement score is 89% (↑5% from last month). Great job everyone!';
+          } else {
+            return 'I can help you with challenges, kudos, surveys, and engagement metrics. What would you like to know more about?';
+          }
         }
     </script>
 </body>
