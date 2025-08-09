@@ -73,6 +73,67 @@
           color: white;
           font-size: 24px;
         }
+
+        .nav-links {
+          display: flex;
+          gap: 30px;
+          align-items: center;
+        }
+
+        .nav-link {
+          text-decoration: none;
+          color: var(--text-color);
+          font-weight: 500;
+          padding: 12px 20px;
+          border-radius: 25px;
+          transition: all 0.3s ease;
+          cursor: pointer;
+        }
+
+        .nav-link.active {
+          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+          color: white;
+          box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .nav-link:hover {
+          color: var(--primary-color);
+        }
+
+        .main-content {
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(10px);
+          border-radius: 20px;
+          padding: 40px;
+          box-shadow: var(--card-shadow);
+          min-height: 600px;
+        }
+
+        .dashboard-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 25px;
+          margin-bottom: 40px;
+        }
+
+        .card {
+          background: white;
+          border-radius: 15px;
+          padding: 30px;
+          box-shadow: var(--card-shadow);
+          transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+          transform: translateY(-5px);
+        }
+
+        .metric-number {
+          font-size: 36px;
+          font-weight: bold;
+          color: var(--primary-color);
+          margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -82,14 +143,37 @@
           <div class="logo-icon">🚀</div>
           <h1>EngagePro</h1>
         </div>
-        <div>
-          <p>Basic header working!</p>
-        </div>
+        <nav class="nav-links">
+          <a class="nav-link active">Dashboard</a>
+          <a class="nav-link">Challenges</a>
+          <a class="nav-link">Kudos Wall</a>
+          <a class="nav-link">Pulse Survey</a>
+          <a class="nav-link">Admin</a>
+        </nav>
       </header>
-      
-      <div style="background: white; padding: 40px; border-radius: 20px;">
-        <h2>✅ Step 1 Complete!</h2>
-        <p>Header and basic styling are working. Ready for Step 2!</p>
+
+      <div class="main-content">
+        <div class="dashboard-grid">
+          <div class="card">
+            <div class="metric-number">89%</div>
+            <p>Engagement Score</p>
+          </div>
+          <div class="card">
+            <div class="metric-number">12</div>
+            <p>Active Challenges</p>
+          </div>
+          <div class="card">
+            <div class="metric-number">156</div>
+            <p>Kudos This Month</p>
+          </div>
+          <div class="card">
+            <div class="metric-number">76%</div>
+            <p>Participation Rate</p>
+          </div>
+        </div>
+        
+        <h2>✅ Step 2 Complete!</h2>
+        <p>Navigation and dashboard cards are working. Ready for Step 3!</p>
       </div>
     </div>
 </body>
