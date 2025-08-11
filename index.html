@@ -1678,59 +1678,45 @@
             const employees = users.filter(u => !u.isAdmin);
             let tableHTML = `
                 <h2 style="color: var(--danger-color); margin-bottom: 20px;">Employee Database</h2>
-                <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: var(--card-shadow); overflow-x: auto;">
-                    <table style="width: 100%; min-width: 1400px; border-collapse: collapse; font-size: 13px;">
+                <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: var(--card-shadow); width: 100%;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 14px; table-layout: fixed;">
                         <thead>
                             <tr style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white;">
-                                <th style="padding: 12px 8px; text-align: left; min-width: 90px; font-weight: 600;">First Name</th>
-                                <th style="padding: 12px 8px; text-align: left; min-width: 90px; font-weight: 600;">Last Name</th>
-                                <th style="padding: 12px 8px; text-align: left; min-width: 180px; font-weight: 600;">Email</th>
-                                <th style="padding: 12px 8px; text-align: left; min-width: 100px; font-weight: 600;">Phone</th>
-                                <th style="padding: 12px 8px; text-align: left; min-width: 100px; font-weight: 600;">Client Name</th>
-                                <th style="padding: 12px 8px; text-align: left; min-width: 80px; font-weight: 600;">Employment Type</th>
-                                <th style="padding: 12px 8px; text-align: left; min-width: 120px; font-weight: 600;">Employer of Record</th>
-                                <th style="padding: 12px 8px; text-align: left; min-width: 90px; font-weight: 600;">Start Date</th>
-                                <th style="padding: 12px 8px; text-align: left; min-width: 90px; font-weight: 600;">Est. End Date</th>
-                                <th style="padding: 12px 8px; text-align: left; min-width: 280px; font-weight: 600;">End Date History</th>
+                                <th style="padding: 15px 10px; text-align: left; width: 10%; font-weight: 600;">First Name</th>
+                                <th style="padding: 15px 10px; text-align: left; width: 10%; font-weight: 600;">Last Name</th>
+                                <th style="padding: 15px 10px; text-align: left; width: 18%; font-weight: 600;">Email</th>
+                                <th style="padding: 15px 10px; text-align: left; width: 10%; font-weight: 600;">Phone</th>
+                                <th style="padding: 15px 10px; text-align: left; width: 10%; font-weight: 600;">Client Name</th>
+                                <th style="padding: 15px 10px; text-align: center; width: 8%; font-weight: 600;">Employment Type</th>
+                                <th style="padding: 15px 10px; text-align: left; width: 12%; font-weight: 600;">Employer of Record</th>
+                                <th style="padding: 15px 10px; text-align: left; width: 8%; font-weight: 600;">Start Date</th>
+                                <th style="padding: 15px 10px; text-align: left; width: 8%; font-weight: 600;">Est. End Date</th>
+                                <th style="padding: 15px 10px; text-align: left; width: 16%; font-weight: 600;">End Date History</th>
                             </tr>
                         </thead>
                         <tbody>
             `;
             
             employees.forEach(emp => {
-                // Format end date history
-                let historyHtml = '';
-                if (emp.endDateHistory && emp.endDateHistory.length > 0) {
-                    historyHtml = emp.endDateHistory.map(entry => {
-                        return `<div style="margin-bottom: 4px; padding: 6px; background: var(--light-bg); border-radius: 6px; font-size: 11px; line-height: 1.3;">
-                                    <div style="font-weight: bold; color: var(--primary-color); margin-bottom: 2px;">${entry.date} → ${entry.changedTo}</div>
-                                    <div style="color: #666; font-style: italic;">${entry.reason}</div>
-                                </div>`;
-                    }).join('');
-                } else {
-                    historyHtml = '<em style="color: #999; font-size: 11px;">No changes recorded</em>';
-                }
-                
                 tableHTML += `
                     <tr style="border-bottom: 1px solid #e1e5e9;">
-                        <td style="padding: 12px 8px; vertical-align: top;">${emp.firstName}</td>
-                        <td style="padding: 12px 8px; vertical-align: top;">${emp.lastName}</td>
-                        <td style="padding: 12px 8px; vertical-align: top; font-size: 12px;">${emp.email}</td>
-                        <td style="padding: 12px 8px; vertical-align: top;">${emp.phone || 'N/A'}</td>
-                        <td style="padding: 12px 8px; vertical-align: top;">${emp.clientName || 'N/A'}</td>
-                        <td style="padding: 12px 8px; vertical-align: top; text-align: center;">
-                            <span style="padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; 
+                        <td style="padding: 15px 10px; vertical-align: top; word-wrap: break-word;">${emp.firstName}</td>
+                        <td style="padding: 15px 10px; vertical-align: top; word-wrap: break-word;">${emp.lastName}</td>
+                        <td style="padding: 15px 10px; vertical-align: top; word-wrap: break-word; font-size: 13px;">${emp.email}</td>
+                        <td style="padding: 15px 10px; vertical-align: top; word-wrap: break-word;">${emp.phone || 'N/A'}</td>
+                        <td style="padding: 15px 10px; vertical-align: top; word-wrap: break-word;">${emp.clientName || 'N/A'}</td>
+                        <td style="padding: 15px 10px; vertical-align: top; text-align: center;">
+                            <span style="padding: 6px 12px; border-radius: 12px; font-size: 12px; font-weight: bold; 
                                          background: ${emp.contractType === 'W2' ? 'linear-gradient(135deg, var(--success-color), #44a08d); color: white' : 'linear-gradient(135deg, var(--warning-color), #ffb74d); color: #333'};">
                                 ${emp.contractType || 'N/A'}
                             </span>
                         </td>
-                        <td style="padding: 12px 8px; vertical-align: top; font-size: 12px;">${emp.employerOfRecord || 'N/A'}</td>
-                        <td style="padding: 12px 8px; vertical-align: top;">${emp.startDate || 'N/A'}</td>
-                        <td style="padding: 12px 8px; vertical-align: top;">${emp.estimatedEndDate || 'N/A'}</td>
-                        <td style="padding: 12px 8px; vertical-align: top; max-width: 280px;">
-                            <div style="max-height: 120px; overflow-y: auto; padding-right: 4px;">
-                                ${historyHtml}
-                            </div>
+                        <td style="padding: 15px 10px; vertical-align: top; word-wrap: break-word; font-size: 13px;">${emp.employerOfRecord || 'N/A'}</td>
+                        <td style="padding: 15px 10px; vertical-align: top; word-wrap: break-word;">${emp.startDate || 'N/A'}</td>
+                        <td style="padding: 15px 10px; vertical-align: top; word-wrap: break-word;">${emp.estimatedEndDate || 'N/A'}</td>
+                        <td style="padding: 15px 10px; vertical-align: top;">
+                            ${emp.estimatedEndDate || 'Current'} 
+                            <a href="#" class="history-link" onclick="showEmployeeHistory('${emp.firstName} ${emp.lastName}')">View History</a>
                         </td>
                     </tr>
                 `;
@@ -1740,9 +1726,9 @@
                         </tbody>
                     </table>
                 </div>
-                <div style="margin-top: 20px; padding: 15px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1)); border-radius: 12px; border-left: 4px solid var(--primary-color);">
-                    <h4 style="color: var(--primary-color); margin-bottom: 10px;">📊 Database Summary</h4>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <div style="margin-top: 20px; padding: 20px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1)); border-radius: 12px; border-left: 4px solid var(--primary-color);">
+                    <h4 style="color: var(--primary-color); margin-bottom: 15px; font-size: 16px;">📊 Database Summary</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; font-size: 14px;">
                         <div>
                             <strong>Total Employees:</strong> ${employees.length}<br>
                             <strong>W2 Employees:</strong> ${employees.filter(e => e.contractType === 'W2').length}<br>
