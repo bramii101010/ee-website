@@ -1675,9 +1675,15 @@
         }
 
         function showEmployeeDatabase() {
+            // Check if the target element exists
+            const targetElement = document.getElementById('employeeDatabaseContent');
+            if (!targetElement) {
+                console.error('employeeDatabaseContent element not found');
+                return;
+            }
+            
             const employees = users.filter(u => !u.isAdmin);
             let tableHTML = `
-                <h2 style="color: var(--danger-color); margin-bottom: 20px;">Employee Database</h2>
                 <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: var(--card-shadow); width: 100%;">
                     <table style="width: 100%; border-collapse: collapse; font-size: 14px; table-layout: fixed;">
                         <thead>
@@ -1747,7 +1753,7 @@
                 </div>
             `;
             
-            document.getElementById('adminDashboard').innerHTML = tableHTML;
+            targetElement.innerHTML = tableHTML;
         }
 
         function createUser() {
