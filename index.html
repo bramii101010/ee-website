@@ -586,16 +586,6 @@
             font-weight: 500;
         }
 
-        .edit-btn {
-            background: linear-gradient(135deg, var(--warning-color), #ffb74d);
-            color: #333;
-        }
-
-        .edit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 230, 109, 0.4);
-        }
-
         .delete-btn {
             background: linear-gradient(135deg, var(--danger-color), #ff5252);
             color: white;
@@ -838,62 +828,6 @@
         .back-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-        }
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .form-actions {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 25px;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-content {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .nav-left, .nav-right {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .days-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .button-group {
-                flex-direction: column;
-            }
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .back-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-bottom: 20px;
-            transition: all 0.3s;
-        }
-
-        .back-btn:hover {
-            background: var(--secondary-color);
-            transform: translateY(-2px);
         }
     </style>
 </head>
@@ -1169,7 +1103,7 @@
                     </div>
                 </div>
 
-                <!-- Other admin sections will be populated by JavaScript -->
+                <!-- Create Challenge Form -->
                 <div id="createChallengeForm" class="hidden">
                     <div class="form-container">
                         <h2 class="form-title">Create Weekly Challenge</h2>
@@ -1185,6 +1119,12 @@
                             <button class="btn btn-warning" onclick="createChallenge()">Create Challenge</button>
                         </div>
                     </div>
+                </div>
+
+                <!-- Employee Database -->
+                <div id="employeeDatabaseContent" class="hidden">
+                    <h1 class="page-title" style="color: #dc143c;">Employee Database</h1>
+                    <!-- Employee database content will be populated by JavaScript -->
                 </div>
             </div>
         </div>
@@ -1497,6 +1437,13 @@
             });
         }
 
+        function hideAllAdminSections() {
+            const sections = ['adminDashboard', 'createUserForm', 'createChallengeForm', 'employeeDatabaseContent'];
+            sections.forEach(section => {
+                document.getElementById(section).classList.add('hidden');
+            });
+        }
+
         function showDashboard() {
             hideAllPages();
             document.getElementById('dashboardPage').classList.remove('hidden');
@@ -1653,20 +1600,17 @@
 
         // Admin functions
         function showAdminDashboard() {
+            hideAllAdminSections();
             document.getElementById('adminDashboard').classList.remove('hidden');
-            document.getElementById('createUserForm').classList.add('hidden');
-            document.getElementById('createChallengeForm').classList.add('hidden');
         }
 
         function showCreateUser() {
-            document.getElementById('adminDashboard').classList.add('hidden');
+            hideAllAdminSections();
             document.getElementById('createUserForm').classList.remove('hidden');
-            document.getElementById('createChallengeForm').classList.add('hidden');
         }
 
         function showCreateChallenge() {
-            document.getElementById('adminDashboard').classList.add('hidden');
-            document.getElementById('createUserForm').classList.add('hidden');
+            hideAllAdminSections();
             document.getElementById('createChallengeForm').classList.remove('hidden');
         }
 
@@ -1675,12 +1619,8 @@
         }
 
         function showEmployeeDatabase() {
-            // Check if the target element exists
-            const targetElement = document.getElementById('employeeDatabaseContent');
-            if (!targetElement) {
-                console.error('employeeDatabaseContent element not found');
-                return;
-            }
+            hideAllAdminSections();
+            document.getElementById('employeeDatabaseContent').classList.remove('hidden');
             
             const employees = users.filter(u => !u.isAdmin);
             let tableHTML = `
@@ -1753,7 +1693,11 @@
                 </div>
             `;
             
-            targetElement.innerHTML = tableHTML;
+            document.getElementById('employeeDatabaseContent').innerHTML = tableHTML;
+        }
+
+        function showEmployeeHistory(employeeName) {
+            alert(`Employee History for ${employeeName}\n\nThis would show detailed history of contract changes, date modifications, and reasons for changes. In a full implementation, this would open a modal with complete history.`);
         }
 
         function createUser() {
