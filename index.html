@@ -3,1992 +3,1863 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Engagement Platform</title>
+    <title>Employee Engagement App</title>
     <style>
         :root {
-          --primary-color: #667eea;
-          --secondary-color: #764ba2;
-          --accent-color: #f093fb;
-          --success-color: #4ecdc4;
-          --warning-color: #ffe66d;
-          --text-color: #2c3e50;
-          --light-bg: #f8f9fa;
-          --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #f093fb;
+            --success-color: #4ecdc4;
+            --warning-color: #ffe66d;
+            --danger-color: #ff6b6b;
+            --text-color: #2c3e50;
+            --light-bg: #f8f9fa;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-          min-height: 100vh;
-          color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: var(--text-color);
         }
 
         .container {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        /* Login Screen Styles */
-        .login-screen {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          min-height: 100vh;
-          padding: 20px;
-        }
-
+        /* Login Page Styles */
         .login-container {
-          background: rgba(255, 255, 255, 0.95);
-          backdrop-filter: blur(10px);
-          border-radius: 20px;
-          padding: 40px;
-          box-shadow: var(--card-shadow);
-          max-width: 400px;
-          width: 100%;
-          text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
-        .login-logo {
-          width: 80px;
-          height: 80px;
-          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-          border-radius: 20px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          font-size: 36px;
-          margin: 0 auto 20px;
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
         }
 
         .login-title {
-          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          font-size: 32px;
-          font-weight: bold;
-          margin-bottom: 10px;
-        }
-
-        .login-subtitle {
-          color: #666;
-          margin-bottom: 30px;
-        }
-
-        .login-tabs {
-          display: flex;
-          margin-bottom: 30px;
-          background: var(--light-bg);
-          border-radius: 10px;
-          padding: 5px;
-        }
-
-        .login-tab {
-          flex: 1;
-          padding: 12px;
-          border: none;
-          background: none;
-          border-radius: 8px;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          font-weight: 500;
-        }
-
-        .login-tab.active {
-          background: white;
-          color: var(--primary-color);
-          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .header {
-          background: rgba(255, 255, 255, 0.95);
-          backdrop-filter: blur(10px);
-          border-radius: 20px;
-          padding: 25px;
-          margin-bottom: 30px;
-          box-shadow: var(--card-shadow);
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-
-        .logo {
-          display: flex;
-          align-items: center;
-          gap: 15px;
-        }
-
-        .logo h1 {
-          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          font-size: 28px;
-          font-weight: bold;
-        }
-
-        .logo-icon {
-          width: 50px;
-          height: 50px;
-          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-          border-radius: 12px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          font-size: 24px;
-        }
-
-        .user-info {
-          display: flex;
-          align-items: center;
-          gap: 15px;
-        }
-
-        .user-avatar {
-          width: 40px;
-          height: 40px;
-          background: var(--primary-color);
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          font-weight: bold;
-        }
-
-        .logout-btn {
-          background: #e74c3c;
-          color: white;
-          border: none;
-          padding: 8px 16px;
-          border-radius: 8px;
-          cursor: pointer;
-          transition: background 0.3s ease;
-          font-size: 14px;
-        }
-
-        .logout-btn:hover {
-          background: #c0392b;
-        }
-
-        .nav-links {
-          display: flex;
-          gap: 30px;
-          align-items: center;
-        }
-
-        .nav-link {
-          text-decoration: none;
-          color: var(--text-color);
-          font-weight: 500;
-          padding: 12px 20px;
-          border-radius: 25px;
-          transition: all 0.3s ease;
-          cursor: pointer;
-        }
-
-        .nav-link.active {
-          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-          color: white;
-          box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .nav-link:hover {
-          color: var(--primary-color);
-        }
-
-        .admin-link {
-          background: linear-gradient(135deg, #667eea, #764ba2);
-          color: white !important;
-          padding: 8px 15px;
-          border-radius: 20px;
-          margin-left: 10px;
-        }
-
-        .main-content {
-          background: rgba(255, 255, 255, 0.95);
-          backdrop-filter: blur(10px);
-          border-radius: 20px;
-          padding: 40px;
-          box-shadow: var(--card-shadow);
-          min-height: 600px;
-        }
-
-        .section {
-          display: none;
-        }
-
-        .section.active {
-          display: block;
-        }
-
-        .dashboard-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 25px;
-          margin-bottom: 40px;
-        }
-
-        .card {
-          background: white;
-          border-radius: 15px;
-          padding: 30px;
-          box-shadow: var(--card-shadow);
-          transition: transform 0.3s ease;
-        }
-
-        .card:hover {
-          transform: translateY(-5px);
-        }
-
-        .metric-number {
-          font-size: 36px;
-          font-weight: bold;
-          color: var(--primary-color);
-          margin-bottom: 10px;
-        }
-
-        .challenges-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-          gap: 25px;
-        }
-
-        .challenge-card {
-          background: white;
-          border-radius: 15px;
-          padding: 25px;
-          box-shadow: var(--card-shadow);
-          transition: transform 0.3s ease;
-          border-left: 5px solid var(--primary-color);
-        }
-
-        .challenge-card:hover {
-          transform: translateY(-3px);
-        }
-
-        .challenge-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-          margin-bottom: 15px;
-        }
-
-        .challenge-title {
-          font-size: 18px;
-          font-weight: 600;
-          margin-bottom: 5px;
-        }
-
-        .challenge-category {
-          display: inline-block;
-          background: var(--light-bg);
-          color: var(--text-color);
-          padding: 4px 12px;
-          border-radius: 20px;
-          font-size: 12px;
-          font-weight: 500;
-        }
-
-        .challenge-points {
-          background: linear-gradient(135deg, var(--success-color), #44a08d);
-          color: white;
-          padding: 8px 15px;
-          border-radius: 20px;
-          font-weight: bold;
-          font-size: 14px;
-        }
-
-        .progress-bar {
-          background: #e1e5e9;
-          border-radius: 10px;
-          height: 8px;
-          margin-bottom: 10px;
-          overflow: hidden;
-        }
-
-        .progress-fill {
-          height: 100%;
-          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-          border-radius: 10px;
-          transition: width 0.3s ease;
-        }
-
-        .btn-primary {
-          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-          color: white;
-          border: none;
-          padding: 12px 24px;
-          border-radius: 25px;
-          font-weight: 500;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-secondary {
-          background: #f8f9fa;
-          color: var(--text-color);
-          border: 2px solid #e1e5e9;
-          padding: 12px 24px;
-          border-radius: 25px;
-          font-weight: 500;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-
-        .kudos-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-          gap: 25px;
-        }
-
-        .kudos-card {
-          background: white;
-          border-radius: 15px;
-          padding: 25px;
-          box-shadow: var(--card-shadow);
-          transition: transform 0.3s ease;
-        }
-
-        .kudos-card:hover {
-          transform: translateY(-3px);
-        }
-
-        .kudos-header {
-          display: flex;
-          align-items: center;
-          gap: 15px;
-          margin-bottom: 15px;
-        }
-
-        .kudos-avatar {
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-          background: var(--primary-color);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          font-weight: bold;
-        }
-
-        .kudos-message {
-          background: var(--light-bg);
-          padding: 15px;
-          border-radius: 10px;
-          margin-bottom: 15px;
-          font-style: italic;
-          line-height: 1.5;
-        }
-
-        .tag {
-          background: #e1e5e9;
-          color: var(--text-color);
-          padding: 4px 10px;
-          border-radius: 15px;
-          font-size: 12px;
-          margin-right: 8px;
-        }
-
-        .survey-section {
-          text-align: center;
-          max-width: 600px;
-          margin: 0 auto;
-        }
-
-        .survey-question {
-          background: white;
-          border-radius: 15px;
-          padding: 30px;
-          margin-bottom: 25px;
-          box-shadow: var(--card-shadow);
-        }
-
-        .question-text {
-          font-size: 18px;
-          font-weight: 600;
-          margin-bottom: 25px;
-        }
-
-        .rating-options {
-          display: flex;
-          justify-content: center;
-          gap: 15px;
-          margin-bottom: 20px;
-        }
-
-        .rating-option {
-          width: 50px;
-          height: 50px;
-          border: 2px solid #e1e5e9;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          font-weight: bold;
-        }
-
-        .rating-option:hover, .rating-option.selected {
-          border-color: var(--primary-color);
-          background: var(--primary-color);
-          color: white;
-        }
-
-        .rating-labels {
-          display: flex;
-          justify-content: space-between;
-          font-size: 12px;
-          color: #666;
-        }
-
-        /* Admin Portal Styles */
-        .admin-portal {
-          display: none;
-        }
-
-        .admin-nav {
-          background: linear-gradient(135deg, #667eea, #764ba2);
-          padding: 15px 0;
-          margin-bottom: 30px;
-          position: sticky;
-          top: 0;
-          z-index: 100;
-        }
-
-        .admin-nav-links {
-          display: flex;
-          justify-content: center;
-          gap: 30px;
-          align-items: center;
-        }
-
-        .admin-nav-link {
-          color: white;
-          text-decoration: none;
-          padding: 10px 20px;
-          border-radius: 8px;
-          transition: background 0.3s ease;
-          cursor: pointer;
-        }
-
-        .admin-nav-link:hover, .admin-nav-link.active {
-          background: rgba(255, 255, 255, 0.2);
-        }
-
-        .admin-section {
-          display: none;
-        }
-
-        .admin-section.active {
-          display: block;
-        }
-
-        .admin-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 30px;
-        }
-
-        .data-table {
-          width: 100%;
-          border-collapse: collapse;
-          background: white;
-          border-radius: 10px;
-          overflow: hidden;
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .data-table th, .data-table td {
-          padding: 15px;
-          text-align: left;
-          border-bottom: 1px solid #e1e5e9;
-        }
-
-        .data-table th {
-          background: #f8f9fa;
-          font-weight: 600;
-        }
-
-        .data-table tr:hover {
-          background: #f8f9fa;
-        }
-
-        .action-btn {
-          background: none;
-          border: none;
-          padding: 5px 10px;
-          margin: 0 2px;
-          border-radius: 5px;
-          cursor: pointer;
-          font-size: 12px;
-          transition: all 0.3s ease;
-        }
-
-        .edit-btn {
-          background: #ffeaa7;
-          color: #fdcb6e;
-        }
-
-        .edit-btn:hover {
-          background: #fdcb6e;
-          color: white;
-        }
-
-        .delete-btn {
-          background: #fab1a0;
-          color: #e17055;
-        }
-
-        .delete-btn:hover {
-          background: #e17055;
-          color: white;
-        }
-
-        .status-badge {
-          padding: 4px 12px;
-          border-radius: 20px;
-          font-size: 12px;
-          font-weight: 500;
-        }
-
-        .status-active {
-          background: #d4edda;
-          color: #155724;
-        }
-
-        .status-pending {
-          background: #fff3cd;
-          color: #856404;
-        }
-
-        .status-completed {
-          background: #cce5ff;
-          color: #004085;
-        }
-
-        .status-inactive {
-          background: #f8d7da;
-          color: #721c24;
-        }
-
-        .filter-controls {
-          display: flex;
-          gap: 10px;
-          margin-bottom: 20px;
-          align-items: center;
-        }
-
-        .filter-btn {
-          padding: 8px 16px;
-          border: 2px solid #e1e5e9;
-          background: white;
-          border-radius: 20px;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          font-size: 14px;
-        }
-
-        .filter-btn.active {
-          background: var(--primary-color);
-          color: white;
-          border-color: var(--primary-color);
-        }
-
-        .history-link {
-          color: var(--primary-color);
-          text-decoration: none;
-          font-size: 12px;
-          cursor: pointer;
-        }
-
-        .history-link:hover {
-          text-decoration: underline;
-        }
-
-        /* Modal Styles */
-        .modal {
-          display: none;
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: rgba(0, 0, 0, 0.5);
-          z-index: 1000;
-          backdrop-filter: blur(5px);
-        }
-
-        .modal.show {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .modal-content {
-          background: white;
-          border-radius: 15px;
-          padding: 30px;
-          max-width: 500px;
-          width: 90%;
-          max-height: 80vh;
-          overflow-y: auto;
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .modal-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 25px;
-        }
-
-        .close-btn {
-          background: none;
-          border: none;
-          font-size: 24px;
-          cursor: pointer;
-          color: #666;
-          padding: 5px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 30px;
         }
 
         .form-group {
-          margin-bottom: 20px;
+            margin-bottom: 20px;
+            text-align: left;
         }
 
         .form-group label {
-          display: block;
-          margin-bottom: 5px;
-          font-weight: 600;
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: 500;
         }
 
         .form-group input, .form-group select, .form-group textarea {
-          width: 100%;
-          padding: 12px;
-          border: 2px solid #e1e5e9;
-          border-radius: 8px;
-          font-size: 14px;
-          transition: border-color 0.3s ease;
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
         }
 
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-          outline: none;
-          border-color: var(--primary-color);
+            outline: none;
+            border-color: var(--primary-color);
         }
 
-        .form-group textarea {
-          resize: vertical;
-          min-height: 100px;
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-group input {
+            width: auto;
+            margin-right: 8px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success-color), #44a08d);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(78, 205, 196, 0.4);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning-color), #ffb74d);
+            color: #333;
+        }
+
+        .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 230, 109, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--light-bg);
+            color: var(--text-color);
+            border: 2px solid #e1e5e9;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: var(--card-shadow);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .app-title {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .nav-left, .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            padding: 12px 20px;
+            background: rgba(255,255,255,0.2);
+            color: var(--text-color);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.dashboard { 
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); 
+            color: white;
+        }
+        .nav-btn.kudos { 
+            background: linear-gradient(135deg, var(--success-color), #44a08d); 
+            color: white;
+        }
+        .nav-btn.challenges { 
+            background: linear-gradient(135deg, var(--warning-color), #ffb74d); 
+            color: #333;
+        }
+        .nav-btn.admin { 
+            background: linear-gradient(135deg, var(--danger-color), #ff5252); 
+            color: white;
+        }
+        .nav-btn.profile { 
+            background: linear-gradient(135deg, var(--accent-color), #c471ed); 
+            color: white;
+        }
+        .nav-btn.help { 
+            background: linear-gradient(135deg, #ff9a9e, #fecfef); 
+            color: #333;
+        }
+        .nav-btn.feedback { 
+            background: linear-gradient(135deg, #a8edea, #fed6e3); 
+            color: #333;
+        }
+        .nav-btn.logout { 
+            background: linear-gradient(135deg, var(--danger-color), #ff5252); 
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            min-height: 600px;
+        }
+
+        .page-title {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .profile-info {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .profile-label {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .profile-value {
+            color: #666;
+        }
+
+        .edit-btn {
+            background: linear-gradient(135deg, var(--accent-color), #c471ed);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+
+        .edit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(240, 147, 251, 0.4);
+        }
+
+        /* Challenge Styles */
+        .challenge-item {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: var(--card-shadow);
+            border-left: 5px solid var(--primary-color);
+            transition: transform 0.3s;
+        }
+
+        .challenge-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .challenge-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .challenge-desc {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .day-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 12px;
+            background: var(--light-bg);
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .day-checkbox:hover {
+            background: #e3f2fd;
+        }
+
+        .complete-week-btn {
+            background: linear-gradient(135deg, var(--success-color), #44a08d);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .complete-week-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(78, 205, 196, 0.4);
+        }
+
+        /* Kudos Styles */
+        .kudos-item {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: var(--card-shadow);
+            border-left: 5px solid var(--success-color);
+            transition: transform 0.3s;
+        }
+
+        .kudos-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .kudos-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .kudos-from {
+            font-weight: bold;
+            color: var(--success-color);
+        }
+
+        .kudos-date {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .kudos-message {
+            background: var(--light-bg);
+            padding: 15px;
+            border-radius: 10px;
+            color: #555;
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        /* Admin Styles */
+        .admin-nav {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 15px 0;
+            margin-bottom: 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .admin-nav .nav-content {
+            justify-content: center;
+        }
+
+        .admin-nav .nav-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            margin: 0 5px;
+        }
+
+        .admin-nav .nav-btn:hover,
+        .admin-nav .nav-btn.active {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-card.users .stat-value { color: var(--primary-color); }
+        .stat-card.challenges .stat-value { color: var(--warning-color); }
+        .stat-card.admins .stat-value { color: var(--danger-color); }
+
+        /* Form Styles */
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-title {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        /* Progress bar styles */
+        .progress-bar {
+            background: #e1e5e9;
+            border-radius: 10px;
+            height: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        /* Filter controls */
+        .filter-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid #e1e5e9;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .history-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .history-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Action buttons */
+        .action-btn {
+            background: none;
+            border: none;
+            padding: 6px 12px;
+            margin: 0 2px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .edit-btn {
+            background: linear-gradient(135deg, var(--warning-color), #ffb74d);
+            color: #333;
+        }
+
+        .edit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 230, 109, 0.4);
+        }
+
+        .delete-btn {
+            background: linear-gradient(135deg, var(--danger-color), #ff5252);
+            color: white;
+        }
+
+        .delete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            padding: 5px;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .close-btn:hover {
+            background: var(--light-bg);
+            color: var(--danger-color);
         }
 
         .modal-actions {
-          display: flex;
-          gap: 15px;
-          justify-content: flex-end;
-          margin-top: 25px;
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+            margin-top: 25px;
         }
 
-        /* Chatbot Styles */
-        .chatbot-toggle {
-          position: fixed;
-          bottom: 20px;
-          right: 20px;
-          width: 60px;
-          height: 60px;
-          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-          border: none;
-          border-radius: 50%;
-          color: white;
-          font-size: 24px;
-          cursor: pointer;
-          box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
-          transition: all 0.3s ease;
-          z-index: 1000;
+        /* Metric number styling */
+        .metric-number {
+            font-size: 36px;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
         }
 
-        .chatbot-toggle:hover {
-          transform: scale(1.1);
+        /* Tag styling */
+        .tag {
+            background: linear-gradient(135deg, var(--accent-color), #c471ed);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin-right: 8px;
+            font-weight: 500;
         }
 
-        .chatbot-container {
-          position: fixed;
-          bottom: 90px;
-          right: 20px;
-          width: 350px;
-          height: 500px;
-          max-height: calc(100vh - 110px);
-          background: white;
-          border-radius: 20px;
-          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-          display: none;
-          flex-direction: column;
-          overflow: hidden;
-          z-index: 1000;
+        /* Challenge category styling */
+        .challenge-category {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
         }
 
-        .chatbot-container.show {
-          display: flex;
+        /* Challenge points styling */
+        .challenge-points {
+            background: linear-gradient(135deg, var(--success-color), #44a08d);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
         }
 
-        .chatbot-header {
-          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-          color: white;
-          padding: 20px;
-          display: flex;
-          align-items: center;
-          gap: 15px;
+        /* User avatar styling */
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
         }
 
-        .chatbot-messages {
-          flex: 1;
-          padding: 20px;
-          overflow-y: auto;
-          display: flex;
-          flex-direction: column;
-          gap: 15px;
+        .kudos-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
         }
 
-        .message {
-          max-width: 80%;
-          padding: 12px 16px;
-          border-radius: 18px;
-          line-height: 1.4;
+        /* Logo styling */
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
         }
 
-        .message.bot {
-          background: #f0f2f5;
-          color: var(--text-color);
-          align-self: flex-start;
+        .login-logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 36px;
+            margin: 0 auto 20px;
         }
 
-        .message.user {
-          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-          color: white;
-          align-self: flex-end;
-        }
-
-        .chatbot-input {
-          padding: 20px;
-          border-top: 1px solid #e1e5e9;
-          display: flex;
-          gap: 10px;
-        }
-
-        .chatbot-input input {
-          flex: 1;
-          padding: 12px 16px;
-          border: 2px solid #e1e5e9;
-          border-radius: 25px;
-          outline: none;
-        }
-
-        .chatbot-send {
-          width: 40px;
-          height: 40px;
-          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-          border: none;
-          border-radius: 50%;
-          color: white;
-          cursor: pointer;
-        }
-
-        /* Demo Users Box */
+        /* Demo users box */
         .demo-users {
-          background: #e3f2fd;
-          border: 1px solid #2196f3;
-          border-radius: 8px;
-          padding: 15px;
-          margin-top: 20px;
-          font-size: 12px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border: 1px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 12px;
         }
 
         .demo-users h4 {
-          color: #1976d2;
-          margin-bottom: 10px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: 600;
         }
 
         .demo-users p {
-          margin: 5px 0;
-          color: #555;
+            margin: 5px 0;
+            color: #555;
         }
 
+        /* Responsive Design */
         @media (max-width: 768px) {
-          .challenges-grid, .kudos-grid { grid-template-columns: 1fr; }
-          .rating-options { gap: 10px; }
-          .rating-option { width: 40px; height: 40px; }
-          .chatbot-container { width: 95%; right: 2.5%; bottom: 70px; height: 70vh; }
-          .nav-links { flex-wrap: wrap; justify-content: center; }
-          .header { flex-direction: column; gap: 20px; }
+            .nav-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-left, .nav-right {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .days-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 20px;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-left, .nav-right {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .days-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .back-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
-    <!-- Login Screen -->
-    <div id="loginScreen" class="login-screen">
-      <div class="login-container">
-        <div class="login-logo">🚀</div>
-        <h1 class="login-title">EngagePro</h1>
-        <p class="login-subtitle">Employee Engagement Platform</p>
-        
-        <div class="login-tabs">
-          <button class="login-tab active" onclick="switchTab('employee')">Employee Login</button>
-          <button class="login-tab" onclick="switchTab('admin')">Admin Login</button>
+    <!-- Login Page -->
+    <div id="loginPage" class="login-container">
+        <div class="login-card">
+            <h1 class="login-title">Employee App Login</h1>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Enter your password">
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="remember">
+                <label for="remember">Remember me</label>
+            </div>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="login()">Login</button>
+                <button class="btn btn-success" onclick="showSignUp()">Sign Up</button>
+                <button class="btn btn-warning" onclick="resetPassword()">Reset Password</button>
+            </div>
         </div>
-
-        <form id="loginForm">
-          <div class="form-group">
-            <input type="text" id="loginUsername" placeholder="Username" required>
-          </div>
-          <div class="form-group">
-            <input type="password" id="loginPassword" placeholder="Password" required>
-          </div>
-          <button type="submit" class="btn-primary" style="width: 100%;">Login</button>
-        </form>
-
-        <div class="demo-users">
-          <h4>Demo Accounts:</h4>
-          <p><strong>Employee:</strong> john.doe / password123</p>
-          <p><strong>Employee:</strong> sarah.chen / password123</p>
-          <p><strong>Admin:</strong> admin / admin123</p>
-        </div>
-      </div>
     </div>
 
-    <!-- Main Application -->
-    <div id="mainApp" class="container" style="display: none;">
-      <header class="header">
-        <div class="logo">
-          <div class="logo-icon">🚀</div>
-          <h1>EngagePro</h1>
+    <!-- Sign Up Modal -->
+    <div id="signUpModal" class="login-container hidden">
+        <div class="login-card">
+            <h2 class="login-title">Create New Account</h2>
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" placeholder="First Name">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" placeholder="Last Name">
+            </div>
+            <div class="form-group">
+                <label for="signUpEmail">Email:</label>
+                <input type="email" id="signUpEmail" placeholder="Email Address">
+            </div>
+            <div class="form-group">
+                <label for="signUpPassword">Password:</label>
+                <input type="password" id="signUpPassword" placeholder="Create Password">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" placeholder="Phone Number">
+            </div>
+            <div class="form-group">
+                <label for="company">Company:</label>
+                <input type="text" id="company" placeholder="Company Name">
+            </div>
+            <div class="button-group">
+                <button class="btn btn-success" onclick="signUp()">Create Account</button>
+                <button class="btn btn-primary" onclick="showLogin()">Back to Login</button>
+            </div>
         </div>
-        
-        <div class="user-info">
-          <div class="user-avatar" id="userAvatar">JD</div>
-          <div>
-            <div style="font-weight: 600;" id="userName">John Doe</div>
-            <div style="font-size: 12px; color: #666;" id="userRole">Employee</div>
-          </div>
-          <button class="logout-btn" onclick="logout()">Logout</button>
-        </div>
-      </header>
-
-      <!-- Employee Navigation -->
-      <div id="employeeNav">
-        <div class="main-content">
-          <nav style="text-align: center; margin-bottom: 30px;">
-            <div style="display: inline-flex; gap: 20px; background: var(--light-bg); padding: 10px; border-radius: 15px;">
-              <a onclick="showSection('dashboard')" class="nav-link active">Dashboard</a>
-              <a onclick="showSection('challenges')" class="nav-link">Challenges</a>
-              <a onclick="showSection('kudos')" class="nav-link">Kudos Wall</a>
-              <a onclick="showSection('pulse')" class="nav-link">Pulse Survey</a>
-            </div>
-          </nav>
-
-          <!-- Dashboard Section -->
-          <div id="dashboard" class="section active">
-            <div class="dashboard-grid">
-              <div class="card">
-                <div class="metric-number">89%</div>
-                <p>Engagement Score</p>
-              </div>
-              <div class="card">
-                <div class="metric-number">12</div>
-                <p>Active Challenges</p>
-              </div>
-              <div class="card">
-                <div class="metric-number">156</div>
-                <p>Kudos This Month</p>
-              </div>
-              <div class="card">
-                <div class="metric-number">76%</div>
-                <p>Participation Rate</p>
-              </div>
-            </div>
-            
-            <div class="card">
-              <h3>🎉 Welcome to EngagePro!</h3>
-              <p style="margin-top: 15px;">Your personalized employee engagement platform with:</p>
-              <ul style="margin: 15px 0; padding-left: 20px;">
-                <li>✅ Interactive challenges to boost wellness and skills</li>
-                <li>✅ Recognition system to celebrate achievements</li>
-                <li>✅ Anonymous pulse surveys for workplace feedback</li>
-                <li>✅ Smart chatbot assistant for instant help</li>
-              </ul>
-              <p><strong>Try the chatbot in the bottom-right corner!</strong></p>
-            </div>
-          </div>
-
-          <!-- Challenges Section -->
-          <div id="challenges" class="section">
-            <h2 style="margin-bottom: 30px; color: var(--primary-color);">🎯 Current Challenges</h2>
-            
-            <div class="challenges-grid" id="challengesContainer">
-              <div class="challenge-card">
-                <div class="challenge-header">
-                  <div>
-                    <h3 class="challenge-title">30-Day Fitness Challenge</h3>
-                    <span class="challenge-category">Wellness</span>
-                  </div>
-                  <div class="challenge-points">50 pts</div>
-                </div>
-                <p style="color: #666; margin-bottom: 20px;">Complete 30 minutes of physical activity daily for 30 days. Track your progress and share your journey!</p>
-                <div class="progress-bar">
-                  <div class="progress-fill" style="width: 65%;"></div>
-                </div>
-                <p style="font-size: 12px; color: #666; margin-bottom: 15px;">65% complete • 23 participants</p>
-                <button class="btn-primary">Join Challenge</button>
-              </div>
-
-              <div class="challenge-card">
-                <div class="challenge-header">
-                  <div>
-                    <h3 class="challenge-title">Sustainability Week</h3>
-                    <span class="challenge-category">Community</span>
-                  </div>
-                  <div class="challenge-points">40 pts</div>
-                </div>
-                <p style="color: #666; margin-bottom: 20px;">Participate in eco-friendly activities: bike to work, bring reusable lunch containers, and share sustainability tips.</p>
-                <div class="progress-bar">
-                  <div class="progress-fill" style="width: 80%;"></div>
-                </div>
-                <p style="font-size: 12px; color: #666; margin-bottom: 15px;">80% complete • 31 participants</p>
-                <button class="btn-primary">Join Challenge</button>
-              </div>
-
-              <div class="challenge-card">
-                <div class="challenge-header">
-                  <div>
-                    <h3 class="challenge-title">Learning Hour</h3>
-                    <span class="challenge-category">Professional</span>
-                  </div>
-                  <div class="challenge-points">60 pts</div>
-                </div>
-                <p style="color: #666; margin-bottom: 20px;">Dedicate one hour each week to learning something new - online courses, books, or skill-sharing sessions.</p>
-                <div class="progress-bar">
-                  <div class="progress-fill" style="width: 25%;"></div>
-                </div>
-                <p style="font-size: 12px; color: #666; margin-bottom: 15px;">25% complete • 42 participants</p>
-                <button class="btn-primary">Join Challenge</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Kudos Wall Section -->
-          <div id="kudos" class="section">
-            <h2 style="margin-bottom: 30px; color: var(--primary-color);">🙌 Kudos Wall</h2>
-            
-            <div style="text-align: center; margin-bottom: 30px;">
-              <button class="btn-primary">+ Submit Kudos</button>
-            </div>
-
-            <div class="kudos-grid">
-              <div class="kudos-card">
-                <div class="kudos-header">
-                  <div class="kudos-avatar">SC</div>
-                  <div>
-                    <h4 style="margin: 0;">Sarah Chen</h4>
-                    <span style="color: #666; font-size: 14px;">to Mike Rodriguez</span>
-                  </div>
-                  <span style="margin-left: auto; color: #999; font-size: 12px;">2 hours ago</span>
-                </div>
-                <p class="kudos-message">"Thank you for staying late to help debug the authentication issue. Your expertise saved us hours!"</p>
-                <div>
-                  <span class="tag">Teamwork</span>
-                  <span class="tag">Problem Solving</span>
-                </div>
-              </div>
-
-              <div class="kudos-card">
-                <div class="kudos-header">
-                  <div class="kudos-avatar">MR</div>
-                  <div>
-                    <h4 style="margin: 0;">Mike Rodriguez</h4>
-                    <span style="color: #666; font-size: 14px;">to Emily Johnson</span>
-                  </div>
-                  <span style="margin-left: auto; color: #999; font-size: 12px;">5 hours ago</span>
-                </div>
-                <p class="kudos-message">"Emily's design mockups for the new dashboard are absolutely stunning. The user experience flow is intuitive and beautiful!"</p>
-                <div>
-                  <span class="tag">Creativity</span>
-                  <span class="tag">Excellence</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Pulse Survey Section -->
-          <div id="pulse" class="section">
-            <div class="survey-section">
-              <h2 style="color: var(--primary-color); margin-bottom: 30px;">📋 Monthly Pulse Survey</h2>
-              <p style="color: #666; margin-bottom: 40px;">Help us improve our workplace by sharing your honest feedback. Your responses are anonymous.</p>
-
-              <div class="survey-question">
-                <p class="question-text">How satisfied are you with your current work-life balance?</p>
-                <div class="rating-options">
-                  <div class="rating-option" data-rating="1">1</div>
-                  <div class="rating-option" data-rating="2">2</div>
-                  <div class="rating-option" data-rating="3">3</div>
-                  <div class="rating-option" data-rating="4">4</div>
-                  <div class="rating-option" data-rating="5">5</div>
-                </div>
-                <div class="rating-labels">
-                  <span>Very Unsatisfied</span>
-                  <span>Very Satisfied</span>
-                </div>
-              </div>
-
-              <div class="survey-question">
-                <p class="question-text">How well does management communicate company goals?</p>
-                <div class="rating-options">
-                  <div class="rating-option" data-rating="1">1</div>
-                  <div class="rating-option" data-rating="2">2</div>
-                  <div class="rating-option" data-rating="3">3</div>
-                  <div class="rating-option" data-rating="4">4</div>
-                  <div class="rating-option" data-rating="5">5</div>
-                </div>
-                <div class="rating-labels">
-                  <span>Very Poorly</span>
-                  <span>Excellently</span>
-                </div>
-              </div>
-
-              <button class="btn-primary" onclick="submitSurvey()" style="margin-top: 30px;">Submit Survey</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Admin Portal -->
-      <div id="adminPortal" class="admin-portal">
-        <div class="admin-nav">
-          <div class="admin-nav-links">
-            <a onclick="showAdminSection('overview')" class="admin-nav-link active">Overview</a>
-            <a onclick="showAdminSection('employees')" class="admin-nav-link">Employees</a>
-            <a onclick="showAdminSection('challenges')" class="admin-nav-link">Challenges</a>
-            <a onclick="showAdminSection('assignments')" class="admin-nav-link">Assignments</a>
-          </div>
-        </div>
-
-        <div class="main-content">
-          <!-- Admin Overview -->
-          <div id="adminOverview" class="admin-section active">
-            <div class="admin-header">
-              <h2>Admin Overview</h2>
-            </div>
-            
-            <div class="dashboard-grid">
-              <div class="card">
-                <div class="metric-number">47</div>
-                <p>Total Employees</p>
-              </div>
-              <div class="card">
-                <div class="metric-number" id="totalChallenges">12</div>
-                <p>Active Challenges</p>
-              </div>
-              <div class="card">
-                <div class="metric-number">156</div>
-                <p>Kudos This Month</p>
-              </div>
-              <div class="card">
-                <div class="metric-number">89%</div>
-                <p>Engagement Score</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Employee Management -->
-          <div id="adminEmployees" class="admin-section">
-            <div class="admin-header">
-              <h2>Employee Management</h2>
-              <button class="btn-primary" onclick="showAddEmployeeModal()">Add Employee</button>
-            </div>
-
-            <div class="filter-controls">
-              <span style="font-weight: 600; margin-right: 10px;">Filter:</span>
-              <button class="filter-btn active" onclick="filterEmployees('all')">All Employees</button>
-              <button class="filter-btn" onclick="filterEmployees('active')">Active Only</button>
-              <button class="filter-btn" onclick="filterEmployees('inactive')">Inactive Only</button>
-            </div>
-            
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Department</th>
-                  <th>Role</th>
-                  <th>Skills</th>
-                  <th>Start Date</th>
-                  <th>End Date</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="employeeTableBody">
-                <tr data-status="active">
-                  <td>John Doe</td>
-                  <td>Engineering</td>
-                  <td>Software Developer</td>
-                  <td>JavaScript, React, Node.js</td>
-                  <td>2023-06-15</td>
-                  <td>Current <a href="#" class="history-link" onclick="showEmployeeHistory('John Doe')">History</a></td>
-                  <td><span class="status-badge status-active">Active</span></td>
-                  <td>
-                    <button class="action-btn edit-btn">Edit</button>
-                    <button class="action-btn delete-btn">Deactivate</button>
-                  </td>
-                </tr>
-                <tr data-status="active">
-                  <td>Sarah Chen</td>
-                  <td>Engineering</td>
-                  <td>Senior Developer</td>
-                  <td>React, Node.js, Python</td>
-                  <td>2022-03-15</td>
-                  <td>Current <a href="#" class="history-link" onclick="showEmployeeHistory('Sarah Chen')">History</a></td>
-                  <td><span class="status-badge status-active">Active</span></td>
-                  <td>
-                    <button class="action-btn edit-btn">Edit</button>
-                    <button class="action-btn delete-btn">Deactivate</button>
-                  </td>
-                </tr>
-                <tr data-status="active">
-                  <td>Mike Rodriguez</td>
-                  <td>Marketing</td>
-                  <td>Marketing Manager</td>
-                  <td>Strategy, Analytics</td>
-                  <td>2021-11-08</td>
-                  <td>Current <a href="#" class="history-link" onclick="showEmployeeHistory('Mike Rodriguez')">History</a></td>
-                  <td><span class="status-badge status-active">Active</span></td>
-                  <td>
-                    <button class="action-btn edit-btn">Edit</button>
-                    <button class="action-btn delete-btn">Deactivate</button>
-                  </td>
-                </tr>
-                <tr data-status="inactive">
-                  <td>David Park</td>
-                  <td>Engineering</td>
-                  <td>DevOps Engineer</td>
-                  <td>AWS, Docker</td>
-                  <td>2020-07-12</td>
-                  <td>2024-12-15 <a href="#" class="history-link" onclick="showEmployeeHistory('David Park')">History</a></td>
-                  <td><span class="status-badge status-inactive">Inactive</span></td>
-                  <td>
-                    <button class="action-btn edit-btn">Edit</button>
-                    <button class="action-btn edit-btn">Reactivate</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <!-- Challenge Management -->
-          <div id="adminChallenges" class="admin-section">
-            <div class="admin-header">
-              <h2>Challenge Management</h2>
-              <button class="btn-primary" onclick="showAddChallengeModal()">Add Challenge</button>
-            </div>
-            
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Challenge Name</th>
-                  <th>Category</th>
-                  <th>Points</th>
-                  <th>Participants</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="challengeTableBody">
-                <tr>
-                  <td>30-Day Fitness Challenge</td>
-                  <td>Wellness</td>
-                  <td>50</td>
-                  <td>23</td>
-                  <td><span class="status-badge status-active">Active</span></td>
-                  <td>
-                    <button class="action-btn edit-btn">Edit</button>
-                    <button class="action-btn delete-btn">Deactivate</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Sustainability Week</td>
-                  <td>Community</td>
-                  <td>40</td>
-                  <td>31</td>
-                  <td><span class="status-badge status-active">Active</span></td>
-                  <td>
-                    <button class="action-btn edit-btn">Edit</button>
-                    <button class="action-btn delete-btn">Deactivate</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Learning Hour</td>
-                  <td>Professional</td>
-                  <td>60</td>
-                  <td>42</td>
-                  <td><span class="status-badge status-active">Active</span></td>
-                  <td>
-                    <button class="action-btn edit-btn">Edit</button>
-                    <button class="action-btn delete-btn">Deactivate</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <!-- Assignment Management -->
-          <div id="adminAssignments" class="admin-section">
-            <div class="admin-header">
-              <h2>Talent Assignments</h2>
-              <button class="btn-primary" onclick="showAddAssignmentModal()">Create Assignment</button>
-            </div>
-
-            <div class="filter-controls">
-              <span style="font-weight: 600; margin-right: 10px;">Filter:</span>
-              <button class="filter-btn active" onclick="filterAssignments('all')">All Assignments</button>
-              <button class="filter-btn" onclick="filterAssignments('active')">Active Only</button>
-              <button class="filter-btn" onclick="filterAssignments('completed')">Completed Only</button>
-            </div>
-            
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Project</th>
-                  <th>Employee</th>
-                  <th>Skills Required</th>
-                  <th>Duration</th>
-                  <th>Start Date</th>
-                  <th>End Date</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="assignmentTableBody">
-                <tr data-status="active">
-                  <td>Mobile App Redesign</td>
-                  <td>Emily Johnson</td>
-                  <td>UI/UX, Mobile Design</td>
-                  <td>6 weeks</td>
-                  <td>2025-07-01</td>
-                  <td>2025-08-15</td>
-                  <td><span class="status-badge status-active">In Progress</span></td>
-                  <td>
-                    <button class="action-btn edit-btn">Edit</button>
-                    <button class="action-btn delete-btn">Complete</button>
-                  </td>
-                </tr>
-                <tr data-status="completed">
-                  <td>Marketing Campaign</td>
-                  <td>Mike Rodriguez</td>
-                  <td>Strategy, Analytics</td>
-                  <td>8 weeks</td>
-                  <td>2025-06-01</td>
-                  <td>2025-07-26</td>
-                  <td><span class="status-badge status-completed">Completed</span></td>
-                  <td>
-                    <button class="action-btn edit-btn">View</button>
-                    <button class="action-btn edit-btn">Archive</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <!-- Modals -->
-    <!-- Add Employee Modal -->
-    <div id="addEmployeeModal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Add New Employee</h3>
-          <button class="close-btn" onclick="hideAddEmployeeModal()">&times;</button>
-        </div>
-        
-        <form id="addEmployeeForm">
-          <div class="form-group">
-            <label for="empName">Full Name</label>
-            <input type="text" id="empName" required>
-          </div>
-          <div class="form-group">
-            <label for="empDepartment">Department</label>
-            <select id="empDepartment" required>
-              <option value="">Select Department</option>
-              <option value="Engineering">Engineering</option>
-              <option value="Marketing">Marketing</option>
-              <option value="Design">Design</option>
-              <option value="Sales">Sales</option>
-              <option value="HR">HR</option>
-              <option value="Finance">Finance</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="empRole">Role</label>
-            <input type="text" id="empRole" required>
-          </div>
-          <div class="form-group">
-            <label for="empSkills">Skills (comma-separated)</label>
-            <input type="text" id="empSkills" placeholder="e.g. JavaScript, React, Node.js" required>
-          </div>
-          <div class="modal-actions">
-            <button type="button" class="btn-secondary" onclick="hideAddEmployeeModal()">Cancel</button>
-            <button type="submit" class="btn-primary">Add Employee</button>
-          </div>
-        </form>
-      </div>
-    </div>
+    <!-- Main App -->
+    <div id="mainApp" class="hidden">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-content">
+                <div class="app-title">Employee App</div>
+                <div class="nav-left">
+                    <button class="nav-btn dashboard" onclick="showDashboard()">Dashboard</button>
+                    <button class="nav-btn kudos" onclick="showKudos()">Kudos Wall</button>
+                    <button class="nav-btn challenges" onclick="showChallenges()">Challenges</button>
+                    <button class="nav-btn admin hidden" id="adminBtn" onclick="showAdmin()">Admin</button>
+                </div>
+                <div class="nav-right">
+                    <button class="nav-btn profile" onclick="showProfile()">Update Profile</button>
+                    <button class="nav-btn help" onclick="showHelp()">Help</button>
+                    <button class="nav-btn feedback" onclick="showFeedback()">Feedback</button>
+                    <button class="nav-btn logout" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </nav>
 
-    <!-- Add Challenge Modal -->
-    <div id="addChallengeModal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Add New Challenge</h3>
-          <button class="close-btn" onclick="hideAddChallengeModal()">&times;</button>
+        <!-- Dashboard Page -->
+        <div id="dashboardPage" class="main-content">
+            <div class="container">
+                <h1 class="page-title" id="welcomeMessage">Welcome back!</h1>
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <h3 class="card-title">Profile Information</h3>
+                        <div id="profileInfo">
+                            <!-- Profile info will be populated by JavaScript -->
+                        </div>
+                        <button class="edit-btn" onclick="showProfile()">Edit Profile</button>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Recent Kudos</h3>
+                        <p id="kudosCount">You have received 0 kudos!</p>
+                        <p style="color: #666; margin-top: 10px;">Keep up the great work and check the Kudos Wall for all your recognition.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Weekly Challenges</h3>
+                        <p id="challengeCount">2 active challenges this week</p>
+                        <p style="color: #666; margin-top: 10px;">Stay healthy and productive with our wellness challenges.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <form id="addChallengeForm">
-          <div class="form-group">
-            <label for="challengeName">Challenge Name</label>
-            <input type="text" id="challengeName" required>
-          </div>
-          <div class="form-group">
-            <label for="challengeCategory">Category</label>
-            <select id="challengeCategory" required>
-              <option value="">Select Category</option>
-              <option value="Wellness">Wellness</option>
-              <option value="Professional">Professional</option>
-              <option value="Team Building">Team Building</option>
-              <option value="Innovation">Innovation</option>
-              <option value="Community">Community</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="challengePoints">Points</label>
-            <input type="number" id="challengePoints" min="10" max="100" required>
-          </div>
-          <div class="form-group">
-            <label for="challengeDescription">Description</label>
-            <textarea id="challengeDescription" required></textarea>
-          </div>
-          <div class="modal-actions">
-            <button type="button" class="btn-secondary" onclick="hideAddChallengeModal()">Cancel</button>
-            <button type="submit" class="btn-primary">Add Challenge</button>
-          </div>
-        </form>
-      </div>
-    </div>
 
-    <!-- Add Assignment Modal -->
-    <div id="addAssignmentModal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Create New Assignment</h3>
-          <button class="close-btn" onclick="hideAddAssignmentModal()">&times;</button>
+        <!-- Kudos Wall Page -->
+        <div id="kudosPage" class="main-content hidden">
+            <div class="container">
+                <button class="back-btn" onclick="showDashboard()">← Back to Dashboard</button>
+                <h1 class="page-title" style="color: #3cb371;">Kudos Wall - Your Recognition</h1>
+                <div id="kudosList">
+                    <div class="kudos-item">
+                        <div class="kudos-header">
+                            <span class="kudos-from">From: Sarah Johnson</span>
+                            <span class="kudos-date">March 15, 2024</span>
+                        </div>
+                        <div class="kudos-message">Great job on the quarterly presentation! Your attention to detail and clear communication really impressed the client.</div>
+                    </div>
+                    <div class="kudos-item">
+                        <div class="kudos-header">
+                            <span class="kudos-from">From: Mike Chen</span>
+                            <span class="kudos-date">March 12, 2024</span>
+                        </div>
+                        <div class="kudos-message">Thank you for helping with the project deadline. Your teamwork and dedication made all the difference!</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <form id="addAssignmentForm">
-          <div class="form-group">
-            <label for="assignmentProject">Project Name</label>
-            <input type="text" id="assignmentProject" required>
-          </div>
-          <div class="form-group">
-            <label for="assignmentEmployee">Assign to Employee</label>
-            <select id="assignmentEmployee" required>
-              <option value="">Select Employee</option>
-              <option value="John Doe">John Doe</option>
-              <option value="Sarah Chen">Sarah Chen</option>
-              <option value="Mike Rodriguez">Mike Rodriguez</option>
-              <option value="Emily Johnson">Emily Johnson</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="assignmentSkills">Skills Required</label>
-            <input type="text" id="assignmentSkills" placeholder="e.g. React, Design, Analytics" required>
-          </div>
-          <div class="form-group">
-            <label for="assignmentDuration">Duration</label>
-            <input type="text" id="assignmentDuration" placeholder="e.g. 4 weeks" required>
-          </div>
-          <div class="form-group">
-            <label for="assignmentStartDate">Start Date</label>
-            <input type="date" id="assignmentStartDate" required>
-          </div>
-          <div class="form-group">
-            <label for="assignmentEndDate">End Date</label>
-            <input type="date" id="assignmentEndDate" required>
-          </div>
-          <div class="modal-actions">
-            <button type="button" class="btn-secondary" onclick="hideAddAssignmentModal()">Cancel</button>
-            <button type="submit" class="btn-primary">Create Assignment</button>
-          </div>
-        </form>
-      </div>
-    </div>
 
-    <!-- Employee History Modal -->
-    <div id="employeeHistoryModal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Employee History</h3>
-          <button class="close-btn" onclick="hideEmployeeHistoryModal()">&times;</button>
-        </div>
-        <div id="employeeHistoryContent"></div>
-        <div style="margin-top: 20px; text-align: right;">
-          <button class="btn-secondary" onclick="hideEmployeeHistoryModal()">Close</button>
-        </div>
-      </div>
-    </div>
+        <!-- Challenges Page -->
+        <div id="challengesPage" class="main-content hidden">
+            <div class="container">
+                <button class="back-btn" onclick="showDashboard()">← Back to Dashboard</button>
+                <h1 class="page-title" style="color: #ff8c00;">Weekly Wellness Challenges</h1>
+                
+                <div class="challenge-item">
+                    <div class="challenge-title">Daily Steps Challenge</div>
+                    <div class="challenge-desc">Walk 250 steps each hour during work hours</div>
+                    <div class="days-grid">
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="steps-mon"> <label for="steps-mon">Monday</label>
+                        </div>
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="steps-tue"> <label for="steps-tue">Tuesday</label>
+                        </div>
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="steps-wed"> <label for="steps-wed">Wednesday</label>
+                        </div>
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="steps-thu"> <label for="steps-thu">Thursday</label>
+                        </div>
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="steps-fri"> <label for="steps-fri">Friday</label>
+                        </div>
+                    </div>
+                    <button class="complete-week-btn" onclick="completeChallenge('steps')">Mark Week Complete</button>
+                </div>
 
-    <!-- Chatbot -->
-    <button class="chatbot-toggle" onclick="toggleChatbot()" style="display: none;" id="chatbotToggle">💬</button>
-    
-    <div class="chatbot-container" id="chatbotContainer">
-      <div class="chatbot-header">
-        <div>🤖</div>
-        <div>
-          <h4 id="chatbotName">EngageBot</h4>
-          <p id="chatbotStatus" style="margin: 0; font-size: 12px; opacity: 0.8;">Online • Ready to help</p>
+                <div class="challenge-item">
+                    <div class="challenge-title">Pomodoro Focus Challenge</div>
+                    <div class="challenge-desc">Use Pomodoro Technique: 25 min focus, 5 min break - once per day</div>
+                    <div class="days-grid">
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="pomodoro-mon"> <label for="pomodoro-mon">Monday</label>
+                        </div>
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="pomodoro-tue"> <label for="pomodoro-tue">Tuesday</label>
+                        </div>
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="pomodoro-wed"> <label for="pomodoro-wed">Wednesday</label>
+                        </div>
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="pomodoro-thu"> <label for="pomodoro-thu">Thursday</label>
+                        </div>
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="pomodoro-fri"> <label for="pomodoro-fri">Friday</label>
+                        </div>
+                    </div>
+                    <button class="complete-week-btn" onclick="completeChallenge('pomodoro')">Mark Week Complete</button>
+                </div>
+            </div>
         </div>
-      </div>
-      
-      <div class="chatbot-messages" id="chatbotMessages">
-        <div class="message bot">
-          Hi! I'm EngageBot. I can help you with challenges, kudos, surveys, and more! What would you like to know?
+
+        <!-- Admin Page -->
+        <div id="adminPage" class="main-content hidden">
+            <div class="admin-nav">
+                <div class="nav-content">
+                    <button class="nav-btn" onclick="showAdminDashboard()">Dashboard</button>
+                    <button class="nav-btn" onclick="showCreateUser()">Create User</button>
+                    <button class="nav-btn" onclick="showCreateChallenge()">Create Challenge</button>
+                    <button class="nav-btn" onclick="showManageChallenges()">Manage Challenges</button>
+                    <button class="nav-btn" onclick="showEmployeeDatabase()">Employee Database</button>
+                </div>
+            </div>
+            
+            <div class="container">
+                <button class="back-btn" onclick="showDashboard()">← Back to App</button>
+                
+                <!-- Admin Dashboard -->
+                <div id="adminDashboard">
+                    <h1 class="page-title" style="color: #dc143c;">Admin Dashboard</h1>
+                    <div class="stats-grid">
+                        <div class="stat-card users">
+                            <div class="stat-value">5</div>
+                            <div class="stat-label">Total Users</div>
+                        </div>
+                        <div class="stat-card challenges">
+                            <div class="stat-value">2</div>
+                            <div class="stat-label">Active Challenges</div>
+                        </div>
+                        <div class="stat-card admins">
+                            <div class="stat-value">1</div>
+                            <div class="stat-label">Admin Users</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Create User Form -->
+                <div id="createUserForm" class="hidden">
+                    <div class="form-container">
+                        <h2 class="form-title">Create New User Profile</h2>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name:</label>
+                                <input type="text" id="newFirstName" placeholder="First Name">
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name:</label>
+                                <input type="text" id="newLastName" placeholder="Last Name">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Email:</label>
+                                <input type="email" id="newEmail" placeholder="Email Address">
+                            </div>
+                            <div class="form-group">
+                                <label>Phone:</label>
+                                <input type="tel" id="newPhone" placeholder="Phone Number">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Client Name:</label>
+                                <input type="text" id="newClient" placeholder="Client Company">
+                            </div>
+                            <div class="form-group">
+                                <label>Employment Type:</label>
+                                <select id="newEmpType" style="width: 100%; padding: 12px; border: 2px solid #e1e5e9; border-radius: 8px;">
+                                    <option value="W2">W2</option>
+                                    <option value="1099">1099</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Employer of Record:</label>
+                                <input type="text" id="newEOR" placeholder="EOR Company">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Notes:</label>
+                            <textarea id="newNotes" rows="3" style="width: 100%; padding: 12px; border: 2px solid #e1e5e9; border-radius: 8px; resize: vertical;" placeholder="Additional notes..."></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn btn-success" onclick="createUser()">Create User</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other admin sections will be populated by JavaScript -->
+                <div id="createChallengeForm" class="hidden">
+                    <div class="form-container">
+                        <h2 class="form-title">Create Weekly Challenge</h2>
+                        <div class="form-group">
+                            <label>Challenge Title:</label>
+                            <input type="text" id="challengeTitle" placeholder="Enter challenge title">
+                        </div>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="challengeDesc" rows="4" style="width: 100%; padding: 12px; border: 2px solid #e1e5e9; border-radius: 8px; resize: vertical;" placeholder="Describe the challenge..."></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn btn-warning" onclick="createChallenge()">Create Challenge</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      
-      <div class="chatbot-input">
-        <input type="text" id="chatbotInput" placeholder="Type your message..." onkeypress="if(event.key==='Enter') sendMessage()">
-        <button class="chatbot-send" onclick="sendMessage()">➤</button>
-      </div>
+
+        <!-- Profile Edit Page -->
+        <div id="profilePage" class="main-content hidden">
+            <div class="container">
+                <button class="back-btn" onclick="showDashboard()">← Back to Dashboard</button>
+                <div class="form-container">
+                    <h2 class="form-title">Edit Profile Information</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>First Name:</label>
+                            <input type="text" id="editFirstName">
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name:</label>
+                            <input type="text" id="editLastName">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Email:</label>
+                            <input type="email" id="editEmail">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone:</label>
+                            <input type="tel" id="editPhone">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Preferred Contact Method:</label>
+                        <select id="editContact" style="width: 100%; padding: 12px; border: 2px solid #e1e5e9; border-radius: 8px;">
+                            <option value="Email">Email</option>
+                            <option value="Phone Call">Phone Call</option>
+                            <option value="Text">Text Message</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-success" onclick="saveProfile()">Save Changes</button>
+                        <button class="btn btn-primary" onclick="showDashboard()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Help Page -->
+        <div id="helpPage" class="main-content hidden">
+            <div class="container">
+                <button class="back-btn" onclick="showDashboard()">← Back to Dashboard</button>
+                <div class="form-container">
+                    <h2 class="form-title">Submit Help Request</h2>
+                    <div class="form-group">
+                        <label>Request Type:</label>
+                        <select id="helpType" style="width: 100%; padding: 12px; border: 2px solid #e1e5e9; border-radius: 8px;">
+                            <option value="">Select request type...</option>
+                            <option value="Tech Support">Tech Support</option>
+                            <option value="General Question">General Question</option>
+                            <option value="Account Issue">Account Issue</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Subject:</label>
+                        <input type="text" id="helpSubject" placeholder="Brief description of your issue">
+                    </div>
+                    <div class="form-group">
+                        <label>Message:</label>
+                        <textarea id="helpMessage" rows="5" style="width: 100%; padding: 12px; border: 2px solid #e1e5e9; border-radius: 8px; resize: vertical;" placeholder="Describe your issue or question in detail..."></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-warning" onclick="submitHelp()">Submit Request</button>
+                        <button class="btn btn-primary" onclick="showDashboard()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feedback Page -->
+        <div id="feedbackPage" class="main-content hidden">
+            <div class="container">
+                <button class="back-btn" onclick="showDashboard()">← Back to Dashboard</button>
+                <div class="form-container">
+                    <h2 class="form-title">Submit Feedback & Suggestions</h2>
+                    <div class="form-group">
+                        <label>Category:</label>
+                        <select id="feedbackCategory" style="width: 100%; padding: 12px; border: 2px solid #e1e5e9; border-radius: 8px;">
+                            <option value="">Select category...</option>
+                            <option value="Feature Request">Feature Request</option>
+                            <option value="Bug Report">Bug Report</option>
+                            <option value="UI/UX Improvement">UI/UX Improvement</option>
+                            <option value="General Feedback">General Feedback</option>
+                            <option value="Complaint">Complaint</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Subject:</label>
+                        <input type="text" id="feedbackSubject" placeholder="Brief summary of your feedback">
+                    </div>
+                    <div class="form-group">
+                        <label>Feedback:</label>
+                        <textarea id="feedbackMessage" rows="5" style="width: 100%; padding: 12px; border: 2px solid #e1e5e9; border-radius: 8px; resize: vertical;" placeholder="Share your thoughts, suggestions, or concerns..."></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-success" onclick="submitFeedback()">Submit Feedback</button>
+                        <button class="btn btn-primary" onclick="showDashboard()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        let surveyResponses = {};
-        let currentUser = null;
-        let isAdmin = false;
-        let loginMode = 'employee';
+        // Sample data storage (in a real app, this would be a database)
+        let users = [
+            {
+                id: 1,
+                firstName: 'John',
+                lastName: 'Doe',
+                email: 'john.doe@company.com',
+                password: 'password123',
+                phone: '555-0123',
+                preferredContact: 'Email',
+                companyName: 'Tech Corp',
+                clientName: 'Microsoft',
+                employerOfRecord: 'Tech Solutions LLC',
+                startDate: '2023-06-01',
+                estimatedEndDate: '2024-08-15',
+                contractType: 'W2',
+                endDateHistory: [
+                    { date: '2024-06-01', changedTo: '2024-08-15', reason: 'Contract extension requested by client' },
+                    { date: '2023-06-01', changedTo: '2024-06-01', reason: 'Initial contract setup' }
+                ],
+                isAdmin: false
+            },
+            {
+                id: 2,
+                firstName: 'Admin',
+                lastName: 'User',
+                email: 'admin@company.com',
+                password: 'admin123',
+                phone: '555-0124',
+                preferredContact: 'Email',
+                companyName: 'Tech Corp',
+                clientName: 'Internal',
+                employerOfRecord: 'Tech Corp',
+                startDate: '2022-01-01',
+                estimatedEndDate: '2025-01-01',
+                contractType: 'W2',
+                endDateHistory: [
+                    { date: '2022-01-01', changedTo: '2025-01-01', reason: 'Initial permanent employment setup' }
+                ],
+                isAdmin: true
+            },
+            {
+                id: 3,
+                firstName: 'Sarah',
+                lastName: 'Johnson',
+                email: 'sarah.johnson@company.com',
+                password: 'sarah123',
+                phone: '555-0125',
+                preferredContact: 'Email',
+                companyName: 'Tech Corp',
+                clientName: 'Google',
+                employerOfRecord: 'Staffing Solutions Inc',
+                startDate: '2023-09-15',
+                estimatedEndDate: '2024-12-31',
+                contractType: '1099',
+                endDateHistory: [
+                    { date: '2024-03-01', changedTo: '2024-12-31', reason: 'Project scope expanded, extended timeline' },
+                    { date: '2023-09-15', changedTo: '2024-09-15', reason: 'Initial 1-year contract' }
+                ],
+                isAdmin: false
+            }
+        ];
 
-        // Demo users database
-        const users = {
-          'john.doe': { password: 'password123', name: 'John Doe', role: 'Employee', department: 'Engineering', avatar: 'JD' },
-          'sarah.chen': { password: 'password123', name: 'Sarah Chen', role: 'Employee', department: 'Engineering', avatar: 'SC' },
-          'admin': { password: 'admin123', name: 'Admin User', role: 'Administrator', department: 'Management', avatar: 'AD' }
-        };
+        let challenges = [
+            {
+                id: 1,
+                title: 'Daily Steps Challenge',
+                description: 'Walk 250 steps each hour during work hours',
+                isActive: true,
+                completedDays: []
+            },
+            {
+                id: 2,
+                title: 'Pomodoro Focus Challenge',
+                description: 'Use Pomodoro Technique: 25 min focus, 5 min break - once per day',
+                isActive: true,
+                completedDays: []
+            }
+        ];
+
+        let kudosMessages = [
+            {
+                id: 1,
+                fromUser: 'Sarah Johnson',
+                toUserId: 1,
+                message: 'Great job on the quarterly presentation! Your attention to detail and clear communication really impressed the client.',
+                dateSent: '2024-03-15'
+            },
+            {
+                id: 2,
+                fromUser: 'Mike Chen',
+                toUserId: 1,
+                message: 'Thank you for helping with the project deadline. Your teamwork and dedication made all the difference!',
+                dateSent: '2024-03-12'
+            }
+        ];
+
+        let currentUser = null;
 
         // Authentication functions
-        function switchTab(mode) {
-          loginMode = mode;
-          document.querySelectorAll('.login-tab').forEach(tab => tab.classList.remove('active'));
-          event.target.classList.add('active');
+        function login() {
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            if (!email || !password) {
+                alert('Please enter both email and password.');
+                return;
+            }
+
+            const user = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
+
+            if (user) {
+                currentUser = user;
+                document.getElementById('loginPage').classList.add('hidden');
+                document.getElementById('mainApp').classList.remove('hidden');
+                
+                // Show admin button if user is admin
+                if (user.isAdmin) {
+                    document.getElementById('adminBtn').classList.remove('hidden');
+                }
+                
+                showDashboard();
+            } else {
+                alert('Invalid email or password.');
+            }
         }
 
-        function login() {
-          const username = document.getElementById('loginUsername').value.toLowerCase();
-          const password = document.getElementById('loginPassword').value;
-          
-          const user = users[username];
-          
-          if (!user || user.password !== password) {
-            showNotification('Invalid username or password!', true);
-            return false;
-          }
+        function showSignUp() {
+            document.getElementById('loginPage').classList.add('hidden');
+            document.getElementById('signUpModal').classList.remove('hidden');
+        }
 
-          // Check if admin trying to login via employee tab or vice versa
-          if (loginMode === 'employee' && username === 'admin') {
-            showNotification('Admin users must use the Admin Login tab!', true);
-            return false;
-          }
-          
-          if (loginMode === 'admin' && username !== 'admin') {
-            showNotification('Regular employees cannot access admin portal!', true);
-            return false;
-          }
+        function showLogin() {
+            document.getElementById('signUpModal').classList.add('hidden');
+            document.getElementById('loginPage').classList.remove('hidden');
+        }
 
-          currentUser = user;
-          isAdmin = (username === 'admin');
-          
-          // Update UI with user info
-          document.getElementById('userAvatar').textContent = user.avatar;
-          document.getElementById('userName').textContent = user.name;
-          document.getElementById('userRole').textContent = user.role;
-          
-          // Show main app
-          document.getElementById('loginScreen').style.display = 'none';
-          document.getElementById('mainApp').style.display = 'block';
-          document.getElementById('chatbotToggle').style.display = 'block';
-          
-          if (isAdmin) {
-            document.getElementById('employeeNav').style.display = 'none';
-            document.getElementById('adminPortal').style.display = 'block';
-            document.getElementById('chatbotName').textContent = 'AdminBot';
-            document.getElementById('chatbotStatus').textContent = 'Admin Mode • Ready to assist';
-            
-            const messagesContainer = document.getElementById('chatbotMessages');
-            messagesContainer.innerHTML = '<div class="message bot">Welcome to Admin Mode! I can help you manage employees, challenges, analytics, and assignments. What would you like to do?</div>';
-            
-            showNotification('🎉 Welcome to Admin Portal!');
-          } else {
-            document.getElementById('employeeNav').style.display = 'block';
-            document.getElementById('adminPortal').style.display = 'none';
-            showNotification(`Welcome back, ${user.name}! 👋`);
-          }
-          
-          return false;
+        function signUp() {
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('signUpEmail').value.trim();
+            const password = document.getElementById('signUpPassword').value;
+            const phone = document.getElementById('phone').value.trim();
+            const company = document.getElementById('company').value.trim();
+
+            if (!firstName || !lastName || !email || !password) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            // Check if email already exists
+            if (users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
+                alert('An account with this email already exists.');
+                return;
+            }
+
+            const newUser = {
+                id: users.length + 1,
+                firstName,
+                lastName,
+                email,
+                password,
+                phone,
+                preferredContact: 'Email',
+                companyName: company,
+                startDate: new Date().toISOString().split('T')[0],
+                estimatedEndDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+                contractType: 'W2',
+                isAdmin: false
+            };
+
+            users.push(newUser);
+            alert('Account created successfully! You can now log in.');
+            showLogin();
+        }
+
+        function resetPassword() {
+            alert('Password reset functionality would be implemented here. For demo purposes, use:\n\nRegular user: john.doe@company.com / password123\nAdmin user: admin@company.com / admin123');
         }
 
         function logout() {
-          currentUser = null;
-          isAdmin = false;
-          
-          document.getElementById('loginScreen').style.display = 'block';
-          document.getElementById('mainApp').style.display = 'none';
-          document.getElementById('chatbotToggle').style.display = 'none';
-          document.getElementById('chatbotContainer').classList.remove('show');
-          
-          // Reset form
-          document.getElementById('loginUsername').value = '';
-          document.getElementById('loginPassword').value = '';
-          
-          // Reset to employee tab
-          loginMode = 'employee';
-          document.querySelectorAll('.login-tab').forEach(tab => tab.classList.remove('active'));
-          document.querySelector('.login-tab').classList.add('active');
-          
-          showNotification('Logged out successfully!');
+            currentUser = null;
+            document.getElementById('mainApp').classList.add('hidden');
+            document.getElementById('loginPage').classList.remove('hidden');
+            document.getElementById('adminBtn').classList.add('hidden');
+            
+            // Clear form fields
+            document.getElementById('email').value = '';
+            document.getElementById('password').value = '';
         }
 
-        // Navigation functionality
-        function showSection(sectionName) {
-          document.querySelectorAll('.section').forEach(section => {
-            section.classList.remove('active');
-          });
-          
-          document.getElementById(sectionName).classList.add('active');
-          
-          document.querySelectorAll('.nav-link').forEach(link => {
-            link.classList.remove('active');
-          });
-          event.target.classList.add('active');
-        }
-
-        // Admin functionality
-        function showAdminSection(sectionName) {
-          document.querySelectorAll('.admin-section').forEach(section => {
-            section.classList.remove('active');
-          });
-          
-          document.getElementById('admin' + sectionName.charAt(0).toUpperCase() + sectionName.slice(1)).classList.add('active');
-          
-          document.querySelectorAll('.admin-nav-link').forEach(link => {
-            link.classList.remove('active');
-          });
-          event.target.classList.add('active');
-        }
-
-        // Modal functions
-        function showAddEmployeeModal() {
-          document.getElementById('addEmployeeModal').classList.add('show');
-        }
-
-        function hideAddEmployeeModal() {
-          document.getElementById('addEmployeeModal').classList.remove('show');
-          document.getElementById('addEmployeeForm').reset();
-        }
-
-        function showAddChallengeModal() {
-          document.getElementById('addChallengeModal').classList.add('show');
-        }
-
-        function hideAddChallengeModal() {
-          document.getElementById('addChallengeModal').classList.remove('show');
-          document.getElementById('addChallengeForm').reset();
-        }
-
-        function showAddAssignmentModal() {
-          document.getElementById('addAssignmentModal').classList.add('show');
-        }
-
-        function hideAddAssignmentModal() {
-          document.getElementById('addAssignmentModal').classList.remove('show');
-          document.getElementById('addAssignmentForm').reset();
-        }
-
-        function showEmployeeHistory(employeeName) {
-          const historyData = {
-            'John Doe': [
-              { period: '2023-06-15 to Current', role: 'Software Developer', department: 'Engineering', reason: 'Active' }
-            ],
-            'Sarah Chen': [
-              { period: '2022-03-15 to Current', role: 'Senior Developer', department: 'Engineering', reason: 'Active' },
-              { period: '2021-01-10 to 2022-03-14', role: 'Developer', department: 'Engineering', reason: 'Promotion' }
-            ],
-            'Mike Rodriguez': [
-              { period: '2021-11-08 to Current', role: 'Marketing Manager', department: 'Marketing', reason: 'Active' }
-            ],
-            'David Park': [
-              { period: '2020-07-12 to 2024-12-15', role: 'DevOps Engineer', department: 'Engineering', reason: 'Resigned' }
-            ]
-          };
-
-          const history = historyData[employeeName] || [];
-          
-          let historyHTML = `<h4 style="margin-bottom: 20px;">${employeeName} - Employment History</h4><table class="data-table"><thead><tr><th>Period</th><th>Role</th><th>Department</th><th>Status</th></tr></thead><tbody>`;
-          
-          history.forEach(entry => {
-            historyHTML += `<tr><td>${entry.period}</td><td>${entry.role}</td><td>${entry.department}</td><td>${entry.reason}</td></tr>`;
-          });
-          
-          historyHTML += '</tbody></table>';
-          
-          document.getElementById('employeeHistoryContent').innerHTML = historyHTML;
-          document.getElementById('employeeHistoryModal').classList.add('show');
-        }
-
-        function hideEmployeeHistoryModal() {
-          document.getElementById('employeeHistoryModal').classList.remove('show');
-        }
-
-        // Filter functions
-        function filterEmployees(status) {
-          const rows = document.querySelectorAll('#employeeTableBody tr');
-          const buttons = document.querySelectorAll('#adminEmployees .filter-btn');
-          
-          buttons.forEach(btn => btn.classList.remove('active'));
-          event.target.classList.add('active');
-          
-          rows.forEach(row => {
-            const rowStatus = row.getAttribute('data-status');
-            row.style.display = (status === 'all' || rowStatus === status) ? '' : 'none';
-          });
-        }
-
-        function filterAssignments(status) {
-          const rows = document.querySelectorAll('#assignmentTableBody tr');
-          const buttons = document.querySelectorAll('#adminAssignments .filter-btn');
-          
-          buttons.forEach(btn => btn.classList.remove('active'));
-          event.target.classList.add('active');
-          
-          rows.forEach(row => {
-            const rowStatus = row.getAttribute('data-status');
-            row.style.display = (status === 'all' || rowStatus === status) ? '' : 'none';
-          });
-        }
-
-        // Add new challenge functionality
-        function addNewChallenge(name, category, points, description) {
-          const challengeTableBody = document.getElementById('challengeTableBody');
-          const challengesContainer = document.getElementById('challengesContainer');
-          
-          // Add to admin table
-          const newRow = challengeTableBody.insertRow(0);
-          newRow.innerHTML = `
-            <td>${name}</td>
-            <td>${category}</td>
-            <td>${points}</td>
-            <td>0</td>
-            <td><span class="status-badge status-active">Active</span></td>
-            <td>
-              <button class="action-btn edit-btn">Edit</button>
-              <button class="action-btn delete-btn">Deactivate</button>
-            </td>
-          `;
-          newRow.style.animation = 'slideUp 0.5s ease-out';
-          
-          // Add to employee challenges view
-          const newChallengeCard = document.createElement('div');
-          newChallengeCard.className = 'challenge-card';
-          newChallengeCard.style.animation = 'slideUp 0.5s ease-out';
-          newChallengeCard.innerHTML = `
-            <div class="challenge-header">
-              <div>
-                <h3 class="challenge-title">${name}</h3>
-                <span class="challenge-category">${category}</span>
-              </div>
-              <div class="challenge-points">${points} pts</div>
-            </div>
-            <p style="color: #666; margin-bottom: 20px;">${description}</p>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 0%;"></div>
-            </div>
-            <p style="font-size: 12px; color: #666; margin-bottom: 15px;">0% complete • 0 participants</p>
-            <button class="btn-primary">Join Challenge</button>
-          `;
-          
-          challengesContainer.insertBefore(newChallengeCard, challengesContainer.firstChild);
-          
-          // Update total challenges count
-          const totalChallenges = document.getElementById('totalChallenges');
-          const currentCount = parseInt(totalChallenges.textContent);
-          totalChallenges.textContent = currentCount + 1;
-        }
-
-        function addNewEmployee(name, department, role, skills) {
-          const tbody = document.getElementById('employeeTableBody');
-          const row = tbody.insertRow(0);
-          const today = new Date().toISOString().split('T')[0];
-          
-          row.setAttribute('data-status', 'active');
-          row.innerHTML = `
-            <td>${name}</td>
-            <td>${department}</td>
-            <td>${role}</td>
-            <td>${skills}</td>
-            <td>${today}</td>
-            <td>Current <a href="#" class="history-link" onclick="showEmployeeHistory('${name}')">History</a></td>
-            <td><span class="status-badge status-active">Active</span></td>
-            <td>
-              <button class="action-btn edit-btn">Edit</button>
-              <button class="action-btn delete-btn">Deactivate</button>
-            </td>
-          `;
-          
-          row.style.animation = 'slideUp 0.5s ease-out';
-        }
-
-        function addNewAssignment(project, employee, skills, duration, startDate, endDate) {
-          const tbody = document.getElementById('assignmentTableBody');
-          const row = tbody.insertRow(0);
-          
-          row.setAttribute('data-status', 'active');
-          row.innerHTML = `
-            <td>${project}</td>
-            <td>${employee}</td>
-            <td>${skills}</td>
-            <td>${duration}</td>
-            <td>${startDate}</td>
-            <td>${endDate}</td>
-            <td><span class="status-badge status-pending">Pending</span></td>
-            <td>
-              <button class="action-btn edit-btn">Edit</button>
-              <button class="action-btn delete-btn">Complete</button>
-            </td>
-          `;
-          
-          row.style.animation = 'slideUp 0.5s ease-out';
-        }
-
-        // Survey functionality
-        function submitSurvey() {
-          const totalQuestions = document.querySelectorAll('.survey-question').length;
-          const answeredQuestions = Object.keys(surveyResponses).length;
-          
-          if (answeredQuestions < totalQuestions) {
-            showNotification('Please answer all questions before submitting.', true);
-            return;
-          }
-          
-          showNotification('Thank you for your feedback! 🙏');
-          
-          document.querySelectorAll('.rating-option').forEach(option => {
-            option.classList.remove('selected');
-          });
-          surveyResponses = {};
-        }
-
-        // Chatbot functionality
-        function toggleChatbot() {
-          const container = document.getElementById('chatbotContainer');
-          container.classList.toggle('show');
-        }
-
-        function sendMessage() {
-          const input = document.getElementById('chatbotInput');
-          const message = input.value.trim();
-          
-          if (!message) return;
-          
-          addMessage(message, 'user');
-          input.value = '';
-          
-          setTimeout(() => {
-            const response = processMessage(message);
-            addMessage(response, 'bot');
-          }, 1000);
-        }
-
-        function addMessage(text, sender) {
-          const messagesContainer = document.getElementById('chatbotMessages');
-          const messageDiv = document.createElement('div');
-          messageDiv.className = `message ${sender}`;
-          messageDiv.textContent = text;
-          
-          messagesContainer.appendChild(messageDiv);
-          messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        function processMessage(message) {
-          const lowerMessage = message.toLowerCase();
-          
-          if (isAdmin) {
-            if (lowerMessage.includes('employee')) {
-              return 'I can help you manage employees. We have employee filtering, history tracking, and onboarding tools. You can add new employees using the "Add Employee" button.';
-            } else if (lowerMessage.includes('challenge')) {
-              return 'For challenge management, you can create new challenges, track participation, and monitor engagement. Use the "Add Challenge" button to create new workplace challenges.';
-            } else if (lowerMessage.includes('assignment')) {
-              return 'For talent assignments, I can help you create new projects, match skills to employees, and track assignment progress. Use the filtering options to view active/completed assignments.';
-            } else if (lowerMessage.includes('analytic') || lowerMessage.includes('report')) {
-              return 'Current analytics: 89% engagement score (↑5%), 156 kudos this month (↑23%), 76% participation rate. I can help generate detailed reports.';
-            } else {
-              return 'As AdminBot, I can assist with: Employee management, Challenge creation, Analytics & reports, Talent assignments, and System administration. What would you like to manage?';
-            }
-          } else {
-            if (lowerMessage.includes('challenge')) {
-              return 'Here are our current challenges: 30-Day Fitness Challenge (50 pts), Sustainability Week (40 pts), and Learning Hour (60 pts). Would you like to join any of these?';
-            } else if (lowerMessage.includes('kudos')) {
-              return 'To submit kudos, click the "Submit Kudos" button on the Kudos Wall. You can recognize colleagues for their great work!';
-            } else if (lowerMessage.includes('survey')) {
-              return 'Our monthly pulse survey is anonymous and takes just 2-3 minutes. Your feedback helps improve our workplace!';
-            } else if (lowerMessage.includes('score')) {
-              return 'Current engagement score is 89% (↑5% from last month). Great job everyone!';
-            } else {
-              return 'I can help you with challenges, kudos, surveys, and engagement metrics. What would you like to know more about?';
-            }
-          }
-        }
-
-        function showNotification(message, isError = false) {
-          const notification = document.createElement('div');
-          notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: ${isError ? '#e74c3c' : 'var(--success-color)'};
-            color: white;
-            padding: 15px 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 1001;
-            animation: slideInRight 0.3s ease-out;
-            max-width: 300px;
-          `;
-          notification.textContent = message;
-          
-          document.body.appendChild(notification);
-          
-          setTimeout(() => {
-            notification.style.animation = 'slideOutRight 0.3s ease-in';
-            setTimeout(() => {
-              if (document.body.contains(notification)) {
-                document.body.removeChild(notification);
-              }
-            }, 300);
-          }, 3000);
-        }
-
-        // Initialize app
-        document.addEventListener('DOMContentLoaded', function() {
-          // Login form handler
-          document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            login();
-          });
-
-          // Survey rating handlers
-          document.querySelectorAll('.rating-option').forEach(option => {
-            option.addEventListener('click', function() {
-              const question = this.closest('.survey-question');
-              const questionIndex = Array.from(document.querySelectorAll('.survey-question')).indexOf(question);
-              
-              question.querySelectorAll('.rating-option').forEach(opt => {
-                opt.classList.remove('selected');
-              });
-              
-              this.classList.add('selected');
-              surveyResponses[questionIndex] = this.dataset.rating;
+        // Navigation functions
+        function hideAllPages() {
+            const pages = ['dashboardPage', 'kudosPage', 'challengesPage', 'adminPage', 'profilePage', 'helpPage', 'feedbackPage'];
+            pages.forEach(page => {
+                document.getElementById(page).classList.add('hidden');
             });
-          });
+        }
 
-          // Form submissions
-          document.getElementById('addEmployeeForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        function showDashboard() {
+            hideAllPages();
+            document.getElementById('dashboardPage').classList.remove('hidden');
             
-            const name = document.getElementById('empName').value;
-            const department = document.getElementById('empDepartment').value;
-            const role = document.getElementById('empRole').value;
-            const skills = document.getElementById('empSkills').value;
-            
-            addNewEmployee(name, department, role, skills);
-            hideAddEmployeeModal();
-            showNotification('Employee added successfully! ✅');
-          });
+            if (currentUser) {
+                document.getElementById('welcomeMessage').textContent = `Welcome back, ${currentUser.firstName} ${currentUser.lastName}!`;
+                
+                // Update profile info
+                const profileInfo = document.getElementById('profileInfo');
+                profileInfo.innerHTML = `
+                    <div class="profile-info">
+                        <span class="profile-label">Name:</span>
+                        <span class="profile-value">${currentUser.firstName} ${currentUser.lastName}</span>
+                    </div>
+                    <div class="profile-info">
+                        <span class="profile-label">Email:</span>
+                        <span class="profile-value">${currentUser.email}</span>
+                    </div>
+                    <div class="profile-info">
+                        <span class="profile-label">Phone:</span>
+                        <span class="profile-value">${currentUser.phone || 'Not provided'}</span>
+                    </div>
+                    <div class="profile-info">
+                        <span class="profile-label">Contact:</span>
+                        <span class="profile-value">${currentUser.preferredContact}</span>
+                    </div>
+                    <div class="profile-info">
+                        <span class="profile-label">Company:</span>
+                        <span class="profile-value">${currentUser.companyName || 'Not provided'}</span>
+                    </div>
+                    <div class="profile-info">
+                        <span class="profile-label">Start Date:</span>
+                        <span class="profile-value">${currentUser.startDate || 'Not provided'}</span>
+                    </div>
+                    <div class="profile-info">
+                        <span class="profile-label">Contract:</span>
+                        <span class="profile-value">${currentUser.contractType || 'Not provided'}</span>
+                    </div>
+                `;
+                
+                // Update kudos count
+                const userKudos = kudosMessages.filter(k => k.toUserId === currentUser.id);
+                document.getElementById('kudosCount').textContent = `You have received ${userKudos.length} kudos!`;
+            }
+        }
 
-          document.getElementById('addChallengeForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('challengeName').value;
-            const category = document.getElementById('challengeCategory').value;
-            const points = document.getElementById('challengePoints').value;
-            const description = document.getElementById('challengeDescription').value;
-            
-            addNewChallenge(name, category, points, description);
-            hideAddChallengeModal();
-            showNotification('Challenge added successfully! 🎯');
-          });
+        function showKudos() {
+            hideAllPages();
+            document.getElementById('kudosPage').classList.remove('hidden');
+        }
 
-          document.getElementById('addAssignmentForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const project = document.getElementById('assignmentProject').value;
-            const employee = document.getElementById('assignmentEmployee').value;
-            const skills = document.getElementById('assignmentSkills').value;
-            const duration = document.getElementById('assignmentDuration').value;
-            const startDate = document.getElementById('assignmentStartDate').value;
-            const endDate = document.getElementById('assignmentEndDate').value;
-            
-            addNewAssignment(project, employee, skills, duration, startDate, endDate);
-            hideAddAssignmentModal();
-            showNotification('Assignment created successfully! 📋');
-          });
+        function showChallenges() {
+            hideAllPages();
+            document.getElementById('challengesPage').classList.remove('hidden');
+        }
 
-          // Modal close handlers
-          ['addEmployeeModal', 'addChallengeModal', 'addAssignmentModal', 'employeeHistoryModal'].forEach(modalId => {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-              modal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                  this.classList.remove('show');
+        function showAdmin() {
+            if (currentUser && currentUser.isAdmin) {
+                hideAllPages();
+                document.getElementById('adminPage').classList.remove('hidden');
+                showAdminDashboard();
+            }
+        }
+
+        function showProfile() {
+            hideAllPages();
+            document.getElementById('profilePage').classList.remove('hidden');
+            
+            // Populate form with current user data
+            if (currentUser) {
+                document.getElementById('editFirstName').value = currentUser.firstName;
+                document.getElementById('editLastName').value = currentUser.lastName;
+                document.getElementById('editEmail').value = currentUser.email;
+                document.getElementById('editPhone').value = currentUser.phone || '';
+                document.getElementById('editContact').value = currentUser.preferredContact;
+            }
+        }
+
+        function showHelp() {
+            hideAllPages();
+            document.getElementById('helpPage').classList.remove('hidden');
+        }
+
+        function showFeedback() {
+            hideAllPages();
+            document.getElementById('feedbackPage').classList.remove('hidden');
+        }
+
+        // Challenge functions
+        function completeChallenge(challengeType) {
+            const days = ['mon', 'tue', 'wed', 'thu', 'fri'];
+            days.forEach(day => {
+                document.getElementById(`${challengeType}-${day}`).checked = true;
+            });
+            
+            const challengeName = challengeType === 'steps' ? 'Daily Steps Challenge' : 'Pomodoro Focus Challenge';
+            alert(`Congratulations! You've completed the '${challengeName}' for this week! 🎉`);
+        }
+
+        // Profile functions
+        function saveProfile() {
+            if (currentUser) {
+                currentUser.firstName = document.getElementById('editFirstName').value.trim();
+                currentUser.lastName = document.getElementById('editLastName').value.trim();
+                currentUser.email = document.getElementById('editEmail').value.trim();
+                currentUser.phone = document.getElementById('editPhone').value.trim();
+                currentUser.preferredContact = document.getElementById('editContact').value;
+                
+                alert('Profile updated successfully!');
+                showDashboard();
+            }
+        }
+
+        // Help and Feedback functions
+        function submitHelp() {
+            const type = document.getElementById('helpType').value;
+            const subject = document.getElementById('helpSubject').value.trim();
+            const message = document.getElementById('helpMessage').value.trim();
+
+            if (!type || !subject || !message) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            alert('Your help request has been submitted successfully! A talent engagement administrator will contact you soon.');
+            
+            // Clear form
+            document.getElementById('helpType').value = '';
+            document.getElementById('helpSubject').value = '';
+            document.getElementById('helpMessage').value = '';
+            
+            showDashboard();
+        }
+
+        function submitFeedback() {
+            const category = document.getElementById('feedbackCategory').value;
+            const subject = document.getElementById('feedbackSubject').value.trim();
+            const message = document.getElementById('feedbackMessage').value.trim();
+
+            if (!category || !subject || !message) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            alert('Thank you for your feedback! We appreciate your input and will review your suggestions.');
+            
+            // Clear form
+            document.getElementById('feedbackCategory').value = '';
+            document.getElementById('feedbackSubject').value = '';
+            document.getElementById('feedbackMessage').value = '';
+            
+            showDashboard();
+        }
+
+        // Admin functions
+        function showAdminDashboard() {
+            document.getElementById('adminDashboard').classList.remove('hidden');
+            document.getElementById('createUserForm').classList.add('hidden');
+            document.getElementById('createChallengeForm').classList.add('hidden');
+        }
+
+        function showCreateUser() {
+            document.getElementById('adminDashboard').classList.add('hidden');
+            document.getElementById('createUserForm').classList.remove('hidden');
+            document.getElementById('createChallengeForm').classList.add('hidden');
+        }
+
+        function showCreateChallenge() {
+            document.getElementById('adminDashboard').classList.add('hidden');
+            document.getElementById('createUserForm').classList.add('hidden');
+            document.getElementById('createChallengeForm').classList.remove('hidden');
+        }
+
+        function showManageChallenges() {
+            alert('Manage Challenges feature - In a full implementation, this would show a list of all challenges with edit/delete options.');
+        }
+
+        function showEmployeeDatabase() {
+            const employees = users.filter(u => !u.isAdmin);
+            let tableHTML = `
+                <h2 style="color: #dc143c; margin-bottom: 20px;">Employee Database</h2>
+                <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                        <thead>
+                            <tr style="background: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+                                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6; min-width: 80px;">First Name</th>
+                                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6; min-width: 80px;">Last Name</th>
+                                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6; min-width: 120px;">Email</th>
+                                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6; min-width: 100px;">Phone</th>
+                                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6; min-width: 100px;">Client Name</th>
+                                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6; min-width: 80px;">Employment Type</th>
+                                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6; min-width: 120px;">Employer of Record</th>
+                                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6; min-width: 90px;">Start Date</th>
+                                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6; min-width: 90px;">Est. End Date</th>
+                                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6; min-width: 200px;">End Date History</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+            
+            employees.forEach(emp => {
+                // Format end date history
+                let historyHtml = '';
+                if (emp.endDateHistory && emp.endDateHistory.length > 0) {
+                    historyHtml = emp.endDateHistory.map(entry => {
+                        return `<div style="margin-bottom: 5px; padding: 4px; background: #f8f9fa; border-radius: 4px; font-size: 12px;">
+                                    <strong>${entry.date}:</strong> Changed to ${entry.changedTo}<br>
+                                    <em style="color: #666;">${entry.reason}</em>
+                                </div>`;
+                    }).join('');
+                } else {
+                    historyHtml = '<em style="color: #999;">No changes recorded</em>';
                 }
-              });
-            }
-          });
+                
+                tableHTML += `
+                    <tr style="border-bottom: 1px solid #dee2e6;">
+                        <td style="padding: 12px; vertical-align: top;">${emp.firstName}</td>
+                        <td style="padding: 12px; vertical-align: top;">${emp.lastName}</td>
+                        <td style="padding: 12px; vertical-align: top;">${emp.email}</td>
+                        <td style="padding: 12px; vertical-align: top;">${emp.phone || 'N/A'}</td>
+                        <td style="padding: 12px; vertical-align: top;">${emp.clientName || 'N/A'}</td>
+                        <td style="padding: 12px; vertical-align: top;">
+                            <span style="padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: bold; 
+                                         background: ${emp.contractType === 'W2' ? '#e7f5e7; color: #2d7d2d' : '#fff3cd; color: #856404'};">
+                                ${emp.contractType || 'N/A'}
+                            </span>
+                        </td>
+                        <td style="padding: 12px; vertical-align: top;">${emp.employerOfRecord || 'N/A'}</td>
+                        <td style="padding: 12px; vertical-align: top;">${emp.startDate || 'N/A'}</td>
+                        <td style="padding: 12px; vertical-align: top;">${emp.estimatedEndDate || 'N/A'}</td>
+                        <td style="padding: 12px; vertical-align: top; max-width: 250px;">
+                            <div style="max-height: 150px; overflow-y: auto;">
+                                ${historyHtml}
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            tableHTML += `
+                        </tbody>
+                    </table>
+                    <div style="margin-top: 20px; padding: 15px; background: #e7f3ff; border-radius: 8px; border-left: 4px solid #4682b4;">
+                        <h4 style="color: #4682b4; margin-bottom: 10px;">📊 Database Summary</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                            <div>
+                                <strong>Total Employees:</strong> ${employees.length}<br>
+                                <strong>W2 Employees:</strong> ${employees.filter(e => e.contractType === 'W2').length}<br>
+                                <strong>1099 Contractors:</strong> ${employees.filter(e => e.contractType === '1099').length}
+                            </div>
+                            <div>
+                                <strong>Active Contracts:</strong> ${employees.filter(e => new Date(e.estimatedEndDate) > new Date()).length}<br>
+                                <strong>Expiring Soon:</strong> ${employees.filter(e => {
+                                    const endDate = new Date(e.estimatedEndDate);
+                                    const today = new Date();
+                                    const thirtyDaysFromNow = new Date(today.getTime() + (30 * 24 * 60 * 60 * 1000));
+                                    return endDate > today && endDate <= thirtyDaysFromNow;
+                                }).length} (within 30 days)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('adminDashboard').innerHTML = tableHTML;
+        }
 
-          // Add animation keyframes
-          const style = document.createElement('style');
-          style.textContent = `
-            @keyframes slideUp {
-              from { transform: translateY(20px); opacity: 0; }
-              to { transform: translateY(0); opacity: 1; }
+        function createUser() {
+            const firstName = document.getElementById('newFirstName').value.trim();
+            const lastName = document.getElementById('newLastName').value.trim();
+            const email = document.getElementById('newEmail').value.trim();
+            const phone = document.getElementById('newPhone').value.trim();
+            const client = document.getElementById('newClient').value.trim();
+            const empType = document.getElementById('newEmpType').value;
+            const eor = document.getElementById('newEOR').value.trim();
+            const notes = document.getElementById('newNotes').value.trim();
+
+            if (!firstName || !lastName || !email) {
+                alert('Please fill in the required fields (First Name, Last Name, Email).');
+                return;
             }
-            @keyframes slideInRight {
-              from { transform: translateX(100%); opacity: 0; }
-              to { transform: translateX(0); opacity: 1; }
+
+            // Check if email already exists
+            if (users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
+                alert('A user with this email already exists.');
+                return;
             }
-            @keyframes slideOutRight {
-              from { transform: translateX(0); opacity: 1; }
-              to { transform: translateX(100%); opacity: 0; }
+
+            const newUser = {
+                id: users.length + 1,
+                firstName,
+                lastName,
+                email,
+                password: 'temppass123', // Temporary password
+                phone,
+                preferredContact: 'Email',
+                companyName: client,
+                clientName: client,
+                employerOfRecord: eor,
+                startDate: new Date().toISOString().split('T')[0],
+                estimatedEndDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+                contractType: empType,
+                endDateHistory: [
+                    { 
+                        date: new Date().toISOString().split('T')[0], 
+                        changedTo: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], 
+                        reason: 'Initial contract setup' 
+                    }
+                ],
+                notes,
+                isAdmin: false
+            };
+
+            users.push(newUser);
+            alert('User created successfully! Temporary password: temppass123');
+            
+            // Clear form
+            document.getElementById('newFirstName').value = '';
+            document.getElementById('newLastName').value = '';
+            document.getElementById('newEmail').value = '';
+            document.getElementById('newPhone').value = '';
+            document.getElementById('newClient').value = '';
+            document.getElementById('newEOR').value = '';
+            document.getElementById('newNotes').value = '';
+            
+            showAdminDashboard();
+        }
+
+        function createChallenge() {
+            const title = document.getElementById('challengeTitle').value.trim();
+            const description = document.getElementById('challengeDesc').value.trim();
+
+            if (!title || !description) {
+                alert('Please fill in both title and description.');
+                return;
             }
-          `;
-          document.head.appendChild(style);
+
+            const newChallenge = {
+                id: challenges.length + 1,
+                title,
+                description,
+                isActive: true,
+                completedDays: []
+            };
+
+            challenges.push(newChallenge);
+            alert('Challenge created successfully!');
+            
+            // Clear form
+            document.getElementById('challengeTitle').value = '';
+            document.getElementById('challengeDesc').value = '';
+            
+            showAdminDashboard();
+        }
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add enter key support for login
+            document.getElementById('password').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    login();
+                }
+            });
         });
     </script>
 </body>
